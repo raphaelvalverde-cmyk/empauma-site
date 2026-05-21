@@ -1,0 +1,18 @@
+# ── Configuration Render.com ────────────────────────────────────
+# 1. Pousser ce dépôt sur GitHub
+# 2. Aller sur https://dashboard.render.com/new/web
+# 3. Connecter le dépôt → Render lit ce fichier automatiquement
+
+services:
+  - type:         web
+    name:         empauma-conciergerie
+    env:          node
+    plan:         free
+    buildCommand: npm install
+    startCommand: node server.js
+    healthCheckPath: /
+    envVars:
+      - key:   NODE_ENV
+        value: production
+      - key:   PORT
+        value: 3000

@@ -1,0 +1,26 @@
+# ── Configuration Netlify ──────────────────────────────────────
+# Déploiement : drag-and-drop du dossier `public/` sur netlify.com/drop
+# OU connecter le dépôt GitHub et Netlify détecte ce fichier automatiquement
+
+[build]
+  command = "npm install && echo OK"
+  publish = "public"
+
+[build.environment]
+  NODE_VERSION = "18"
+
+# En-têtes de sécurité
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options            = "DENY"
+    X-Content-Type-Options     = "nosniff"
+    X-XSS-Protection           = "1; mode=block"
+    Referrer-Policy            = "strict-origin-when-cross-origin"
+    Cache-Control              = "public, max-age=604800"
+
+# SPA : toutes les routes renvoient index.html
+[[redirects]]
+  from   = "/*"
+  to     = "/index.html"
+  status = 200
