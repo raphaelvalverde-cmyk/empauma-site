@@ -1,23 +1,38 @@
-# Dépendances
+# Dependencies
 node_modules/
 
-# Variables d'environnement
+# Next.js
+/.next/
+/out/
+
+# Environment variables
 .env
 .env.local
+.env*.local
 .env.production
 
 # Logs
 *.log
 npm-debug.log*
 
-# Système
+# System
 .DS_Store
 Thumbs.db
 
-# Éditeurs
+# Editors
 .vscode/
 .idea/
 
 # Build / cache
 dist/
 .cache/
+
+# Vercel
+.vercel
+
+# TypeScript
+next-env.d.ts
+*.tsbuildinfo
+
+# Temp
+css-extracted.css

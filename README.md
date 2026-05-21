@@ -4,22 +4,20 @@ Site web de la conciergerie **Empauma** — gestion de locations saisonnières e
 
 ## Stack
 
-- **Node.js** (≥ 18) + **Express** — serveur HTTP
-- **Helmet** — sécurité des en-têtes HTTP
-- **Compression** — gzip automatique
-- HTML / CSS / JS natifs — aucun framework frontend
+- **Next.js 15** (App Router) + **React 19**
+- **TypeScript**
+- CSS global (variables CSS personnalisées, animations, responsive)
 
 ## Démarrage local
 
 ```bash
-# 1. Installer les dépendances
+# 1. Installer Node.js 18+ depuis https://nodejs.org
+
+# 2. Installer les dépendances
 npm install
 
-# 2. Lancer en développement (rechargement automatique)
+# 3. Lancer en développement
 npm run dev
-
-# 3. Ou lancer en production
-npm start
 ```
 
 Le site est accessible sur **http://localhost:3000**
@@ -28,26 +26,47 @@ Le site est accessible sur **http://localhost:3000**
 
 ```
 empauma-site/
+├── app/
+│   ├── globals.css      ← styles globaux
+│   ├── layout.tsx       ← layout racine (métadonnées, polices)
+│   └── page.tsx         ← page principale
+├── components/
+│   ├── Navbar.tsx       ← navigation (sticky, menu mobile)
+│   ├── Hero.tsx         ← section héro
+│   ├── Services.tsx     ← grille des services
+│   ├── Offer.tsx        ← offre tarifaire
+│   ├── Metrics.tsx      ← chiffres clés
+│   ├── Properties.tsx   ← logements
+│   ├── Testimonials.tsx ← avis propriétaires
+│   ├── About.tsx        ← histoire de la conciergerie
+│   ├── Contact.tsx      ← formulaire de contact
+│   ├── FAQ.tsx          ← questions fréquentes (accordéon)
+│   ├── Footer.tsx       ← pied de page
+│   └── ScrollReveal.tsx ← animations au défilement
 ├── public/
-│   ├── index.html   ← site complet (photos intégrées en base64)
 │   ├── robots.txt
 │   └── sitemap.xml
-├── server.js        ← serveur Express
-├── package.json
-└── .gitignore
+├── next.config.ts
+├── tsconfig.json
+└── package.json
 ```
 
 ## Déploiement
 
-### Render.com (recommandé, gratuit)
+### Vercel (recommandé — détection automatique Next.js)
 1. Pousser ce dépôt sur GitHub
-2. Connecter le dépôt sur [render.com](https://render.com)
-3. Type : **Web Service** — Build : `npm install` — Start : `npm start`
+2. Aller sur [vercel.com](https://vercel.com) → **New Project**
+3. Connecter le dépôt GitHub → **Deploy**
 
-### Variables d'environnement
-| Variable | Valeur par défaut | Description |
-|----------|------------------|-------------|
-| `PORT`   | `3000`           | Port du serveur |
+### Netlify
+1. Pousser ce dépôt sur GitHub
+2. Connecter sur [netlify.com](https://netlify.com)
+3. Le fichier `netlify.toml` est déjà configuré
+
+### Render.com
+1. Pousser ce dépôt sur GitHub
+2. Connecter sur [render.com](https://render.com)
+3. Le fichier `render.yaml` est déjà configuré
 
 ## Contact
 
