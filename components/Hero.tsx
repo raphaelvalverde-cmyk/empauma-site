@@ -1,7 +1,17 @@
+import Image from 'next/image'
+
 export default function Hero() {
   return (
     <header className="hero" id="accueil">
-      <div className="hero-bg" />
+      <div className="hero-bg">
+        <Image
+          src="/images/fond-mer.jpg"
+          alt="Vue sur mer en Provence-Alpes-Côte d'Azur"
+          fill
+          style={{ objectFit: 'cover' }}
+          priority
+        />
+      </div>
 
       <svg
         className="hero-deco-leaf"

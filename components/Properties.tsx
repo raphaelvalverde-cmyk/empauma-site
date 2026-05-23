@@ -1,3 +1,5 @@
+import Image from 'next/image'
+
 const locIcon = (
   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7A8C4E" strokeWidth="2" aria-hidden="true">
     <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
@@ -6,8 +8,18 @@ const locIcon = (
 )
 
 const properties = [
-  { tag: 'Villa', name: 'Villa du Réal Martin', location: 'Pierrefeu-du-Var' },
-  { tag: 'Maison', name: 'Maison de village', location: 'Le Lavandou' },
+  {
+    tag: 'Villa',
+    name: 'Villa du Réal Martin',
+    location: 'Pierrefeu-du-Var',
+    img: '/images/villa-reel-martin.jpg',
+  },
+  {
+    tag: 'Maison',
+    name: 'Maison de village',
+    location: 'Le Lavandou',
+    img: '/images/maison-lavandou.jpg',
+  },
 ]
 
 export default function Properties() {
@@ -28,7 +40,14 @@ export default function Properties() {
         <div className="properties-grid reveal-stagger">
           {properties.map((prop, i) => (
             <div key={i} className="property-card">
-              <div className="property-photo">
+              <div className="property-photo" style={{ position: 'relative' }}>
+                <Image
+                  src={prop.img}
+                  alt={prop.name}
+                  fill
+                  style={{ objectFit: 'cover' }}
+                  sizes="(max-width: 680px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                />
                 <span className="property-tag">{prop.tag}</span>
               </div>
               <div className="property-info">
