@@ -3,8 +3,7 @@ import { NextResponse } from 'next/server'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
-// Adresse "from" : utilise le domaine vérifié si dispo, sinon le domaine Resend par défaut
-const FROM_ADDRESS = 'Empauma Conciergerie <onboarding@resend.dev>'
+const FROM_ADDRESS = 'Empauma Conciergerie <contact@empauma-conciergerie.fr>'
 const TO_ADDRESS   = 'contact@empauma-conciergerie.fr'
 
 export async function POST(req: Request) {
