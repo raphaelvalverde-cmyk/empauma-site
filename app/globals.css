@@ -1214,3 +1214,80 @@ section { position: relative; overflow: hidden; }
   .offer-card { padding: 38px 28px; }
   .contact-form { padding: 32px 26px; }
 }
+
+/* ============ PAGE MERCI ============ */
+.merci-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--cream);
+  padding: 40px 24px;
+}
+.merci-card {
+  background: var(--white-warm);
+  border-radius: 28px;
+  padding: 60px 56px;
+  max-width: 560px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 40px 80px rgba(46, 42, 30, 0.1);
+  border: 1px solid var(--border-soft);
+}
+.merci-icon {
+  width: 88px;
+  height: 88px;
+  background: var(--sage-pale);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 28px;
+}
+.merci-card h1 {
+  font-family: var(--serif);
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 400;
+  color: var(--ink-dark);
+  line-height: 1.15;
+  margin: 16px 0 24px;
+}
+.merci-card h1 em {
+  font-style: italic;
+  color: var(--sage);
+}
+.merci-lead {
+  font-size: 16px;
+  color: var(--ink-mid);
+  line-height: 1.7;
+  margin-bottom: 12px;
+}
+.merci-sub {
+  font-size: 14px;
+  color: var(--ink-soft);
+  margin-bottom: 36px;
+}
+.merci-card .btn {
+  display: inline-flex;
+  margin-bottom: 40px;
+}
+.merci-signature {
+  border-top: 1px solid var(--border-soft);
+  padding-top: 28px;
+  font-family: var(--serif);
+  font-style: italic;
+  color: var(--ink-soft);
+  font-size: 15px;
+}
+.merci-signature span {
+  display: block;
+  margin-top: 8px;
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-style: normal;
+  color: var(--sage);
+}
+@media (max-width: 680px) {
+  .merci-card { padding: 40px 28px; }
+}

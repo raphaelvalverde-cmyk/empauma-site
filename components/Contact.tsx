@@ -62,7 +62,7 @@ export default function Contact() {
               <input type="hidden" name="_autoresponse" value="Merci pour votre message ! Nous vous répondrons dans les 24h ouvrées. — L'équipe Empauma" />
               <input type="hidden" name="_captcha" value="false" />
               <input type="hidden" name="_template" value="table" />
-              <input type="hidden" name="_next" value="https://www.empauma-conciergerie.fr/?sent=1" />
+              <input type="hidden" name="_next" value="https://www.empauma-conciergerie.fr/merci" />
               <input type="text" name="_honey" style={{ display: 'none' }} aria-hidden="true" />
 
               <div className="form-row">
