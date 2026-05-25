@@ -594,7 +594,7 @@ section { position: relative; overflow: hidden; }
   line-height: 1;
   margin: 14px 0 4px;
 }
-.offer-card .price span { font-size: 28px; color: var(--ocre-honey); }
+.offer-card .price span { font-size: 28px; color: var(--ocre-rust); }
 .offer-card .price-sub { font-size: 14px; color: var(--ink-soft); margin-bottom: 28px; }
 .offer-card .divider { height: 1px; background: var(--border-soft); margin: 26px 0; }
 .offer-list li {
