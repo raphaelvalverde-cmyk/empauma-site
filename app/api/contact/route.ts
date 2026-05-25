@@ -3,6 +3,10 @@ import { NextResponse } from 'next/server'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
+// Adresse "from" : utilise le domaine vérifié si dispo, sinon le domaine Resend par défaut
+const FROM_ADDRESS = 'Empauma Conciergerie <onboarding@resend.dev>'
+const TO_ADDRESS   = 'contact@empauma-conciergerie.fr'
+
 export async function POST(req: Request) {
   try {
     const body = await req.json()
@@ -12,9 +16,10 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Champs manquants' }, { status: 400 })
     }
 
-    await resend.emails.send({
-      from: 'Empauma Conciergerie <contact@empauma-conciergerie.fr>',
-      to: ['contact@empauma-conciergerie.fr'],
+    // 1. Notification à Empauma
+    const notif = await resend.emails.send({
+      from: FROM_ADDRESS,
+      to: [TO_ADDRESS],
       replyTo: email,
       subject: `Nouveau contact — ${name}`,
       html: `
@@ -35,9 +40,14 @@ export async function POST(req: Request) {
       `,
     })
 
-    // Email de confirmation au visiteur
-    await resend.emails.send({
-      from: 'Empauma Conciergerie <contact@empauma-conciergerie.fr>',
+    if (notif.error) {
+      console.error('Resend notification error:', notif.error)
+      return NextResponse.json({ error: notif.error.message }, { status: 500 })
+    }
+
+    // 2. Accusé de réception au visiteur
+    const confirm = await resend.emails.send({
+      from: FROM_ADDRESS,
       to: [email],
       subject: 'Nous avons bien reçu votre message — Empauma Conciergerie',
       html: `
@@ -55,9 +65,15 @@ export async function POST(req: Request) {
       `,
     })
 
+    if (confirm.error) {
+      // L'email de confirmation a échoué mais la notif est passée — on redirige quand même
+      console.warn('Resend confirmation warning:', confirm.error)
+    }
+
     return NextResponse.json({ success: true })
+
   } catch (error) {
-    console.error('Erreur envoi email:', error)
+    console.error('Erreur inattendue:', error)
     return NextResponse.json({ error: 'Erreur serveur' }, { status: 500 })
   }
 }
