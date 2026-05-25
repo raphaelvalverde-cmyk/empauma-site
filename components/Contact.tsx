@@ -1,4 +1,42 @@
+'use client'
+import { useState } from 'react'
+import { useRouter } from 'next/navigation'
+
 export default function Contact() {
+  const router = useRouter()
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    setLoading(true)
+    setError('')
+
+    const form = e.currentTarget
+    const data = {
+      name:    (form.elements.namedItem('name')    as HTMLInputElement).value,
+      email:   (form.elements.namedItem('email')   as HTMLInputElement).value,
+      phone:   (form.elements.namedItem('phone')   as HTMLInputElement).value,
+      type:    (form.elements.namedItem('type')     as HTMLSelectElement).value,
+      dispo:   (form.elements.namedItem('dispo')    as HTMLSelectElement).value,
+      message: (form.elements.namedItem('message') as HTMLTextAreaElement).value,
+    }
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      })
+
+      if (!res.ok) throw new Error()
+      router.push('/merci')
+    } catch {
+      setError('Une erreur est survenue. Veuillez réessayer ou nous contacter directement par email.')
+      setLoading(false)
+    }
+  }
+
   return (
     <section className="contact section-pad" id="contact">
       <div className="blob blob-1" />
@@ -54,17 +92,7 @@ export default function Contact() {
           </div>
 
           <div className="contact-form reveal">
-            <form
-              action="https://formsubmit.co/contact@empauma-conciergerie.fr"
-              method="POST"
-            >
-              <input type="hidden" name="_subject" value="Nouveau contact — Empauma Conciergerie" />
-              <input type="hidden" name="_autoresponse" value="Merci pour votre message ! Nous vous répondrons dans les 24h ouvrées. — L'équipe Empauma" />
-              <input type="hidden" name="_captcha" value="false" />
-              <input type="hidden" name="_template" value="table" />
-              <input type="hidden" name="_next" value="https://www.empauma-conciergerie.fr/merci" />
-              <input type="text" name="_honey" style={{ display: 'none' }} aria-hidden="true" />
-
+            <form onSubmit={handleSubmit}>
               <div className="form-row">
                 <div className="form-group">
                   <label htmlFor="name">Nom et prénom</label>
@@ -114,9 +142,15 @@ export default function Contact() {
                 />
               </div>
 
-              <button type="submit" className="btn btn-primary">
-                <span>Envoyer ma demande</span>
-                <span className="arrow">→</span>
+              {error && (
+                <p style={{ color: '#B5703F', fontSize: '14px', marginBottom: '12px' }}>
+                  {error}
+                </p>
+              )}
+
+              <button type="submit" className="btn btn-primary" disabled={loading}>
+                <span>{loading ? 'Envoi en cours…' : 'Envoyer ma demande'}</span>
+                {!loading && <span className="arrow">→</span>}
               </button>
               <p className="form-note">Réponse garantie sous 24h ouvrées. Vos données restent confidentielles.</p>
             </form>
