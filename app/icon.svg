@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="32" height="32">
+  <!-- Fond arrondi olive profond -->
+  <rect width="100" height="100" rx="20" ry="20" fill="#3D4F25"/>
+  <!-- Étoile 4 branches dorée (✦) — même symbole que le logo Empauma -->
+  <polygon
+    points="50,8 61,39 92,50 61,61 50,92 39,61 8,50 39,39"
+    fill="#C49A58"
+  />
+</svg>
