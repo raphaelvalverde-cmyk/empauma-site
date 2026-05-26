@@ -1,0 +1,730 @@
+const puppeteer = require('puppeteer');
+const QRCode = require('qrcode');
+const path = require('path');
+const fs = require('fs');
+
+async function generateFlyer() {
+  // Generate QR code as data URL
+  const qrDataUrl = await QRCode.toDataURL('https://www.empauma-conciergerie.fr', {
+    width: 180,
+    margin: 2,
+    color: {
+      dark: '#3D4F25',
+      light: '#FBF8EF',
+    },
+    errorCorrectionLevel: 'H',
+  });
+
+  const html = `<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EMPAUMA Conciergerie – Flyer</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --olive-deep: #3D4F25;
+    --olive-rich: #4F6230;
+    --sage: #7A8C4E;
+    --sage-light: #9AAA72;
+    --sage-pale: #D4DCA8;
+    --cream: #F4EDD8;
+    --cream-pure: #FBF8EF;
+    --cream-deep: #ECE0BD;
+    --white-warm: #FEFCF7;
+    --ocre: #C49A58;
+    --ocre-soft: #D9B47D;
+    --ocre-rust: #8C5E28;
+    --ink: #2E2A1E;
+    --ink-soft: #5C5444;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Jost', Arial, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 210mm;
+    height: 297mm;
+    font-family: var(--sans);
+    background: var(--white-warm);
+    color: var(--ink);
+    overflow: hidden;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .page {
+    width: 210mm;
+    height: 297mm;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* ── TOP BAND ── */
+  .header {
+    background: var(--olive-deep);
+    padding: 26px 36px 22px;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -24px;
+    left: 0; right: 0;
+    height: 48px;
+    background: var(--olive-deep);
+    clip-path: ellipse(55% 100% at 50% 0%);
+  }
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .brand-logo {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+  .brand-name {
+    font-family: var(--serif);
+    font-size: 38px;
+    font-weight: 400;
+    color: var(--cream);
+    letter-spacing: 6px;
+    line-height: 1;
+  }
+  .brand-sub {
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--ocre);
+    margin-top: 2px;
+  }
+  .brand-tagline {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 13px;
+    color: var(--sage-pale);
+    margin-top: 6px;
+  }
+  .header-region {
+    text-align: right;
+  }
+  .region-label {
+    font-family: var(--sans);
+    font-size: 8.5px;
+    font-weight: 500;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--ocre-soft);
+  }
+  .region-name {
+    font-family: var(--serif);
+    font-size: 14px;
+    color: var(--cream);
+    margin-top: 3px;
+    letter-spacing: 1px;
+  }
+
+  /* Leaf deco */
+  .leaf-top {
+    position: absolute;
+    top: -10px;
+    right: 120px;
+    opacity: 0.14;
+  }
+
+  /* ── HERO STRIP ── */
+  .hero-strip {
+    background: linear-gradient(135deg, var(--olive-rich) 0%, var(--sage) 100%);
+    padding: 18px 36px 16px;
+    margin-top: 20px;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .hero-strip h1 {
+    font-family: var(--serif);
+    font-size: 26px;
+    font-weight: 400;
+    color: var(--cream-pure);
+    line-height: 1.2;
+  }
+  .hero-strip h1 em {
+    font-style: italic;
+    color: var(--ocre-soft);
+  }
+  .hero-strip p {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 300;
+    color: var(--sage-pale);
+    margin-top: 6px;
+    letter-spacing: 0.3px;
+  }
+  .trust-pills {
+    display: flex;
+    gap: 14px;
+    margin-top: 10px;
+  }
+  .pill {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(244,237,216,0.25);
+    border-radius: 30px;
+    padding: 4px 12px;
+    font-family: var(--sans);
+    font-size: 9.5px;
+    font-weight: 400;
+    color: var(--cream);
+    letter-spacing: 0.3px;
+  }
+  .pill-dot {
+    width: 5px;
+    height: 5px;
+    background: var(--ocre);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ── BODY ── */
+  .body {
+    flex: 1;
+    display: flex;
+    gap: 0;
+    padding: 24px 36px 0;
+    overflow: hidden;
+  }
+
+  /* LEFT: Services */
+  .col-services {
+    flex: 1.15;
+    padding-right: 20px;
+  }
+  .col-title {
+    font-family: var(--sans);
+    font-size: 8.5px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 10px;
+  }
+  .services-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .svc {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    background: var(--cream-pure);
+    border: 1px solid rgba(122,140,78,0.2);
+    border-radius: 8px;
+    padding: 8px 9px;
+  }
+  .svc-icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    background: var(--olive-deep);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1px;
+  }
+  .svc-icon svg {
+    width: 12px;
+    height: 12px;
+  }
+  .svc-text {
+    font-family: var(--sans);
+    font-size: 9.5px;
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 1.35;
+  }
+  .svc-text strong {
+    font-weight: 600;
+    font-size: 9.5px;
+    display: block;
+    color: var(--olive-deep);
+  }
+
+  /* Divider */
+  .col-divider {
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, rgba(122,140,78,0.3) 20%, rgba(122,140,78,0.3) 80%, transparent);
+    margin: 0 4px;
+    flex-shrink: 0;
+  }
+
+  /* RIGHT: Pricing + QR */
+  .col-right {
+    flex: 0.9;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  /* Price card */
+  .price-card {
+    background: var(--olive-deep);
+    border-radius: 14px;
+    padding: 20px 18px 18px;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+  .price-card::before {
+    content: '';
+    position: absolute;
+    top: -30px;
+    right: -30px;
+    width: 90px;
+    height: 90px;
+    background: var(--ocre);
+    opacity: 0.12;
+    border-radius: 50%;
+  }
+  .price-ribbon {
+    display: inline-block;
+    background: var(--ocre);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 7.5px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 3px 12px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+  }
+  .price-label {
+    font-family: var(--sans);
+    font-size: 8.5px;
+    font-weight: 500;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--sage-pale);
+    margin-bottom: 6px;
+  }
+  .price-big {
+    font-family: var(--serif);
+    font-size: 64px;
+    font-weight: 400;
+    color: var(--cream-pure);
+    line-height: 1;
+  }
+  .price-big sup {
+    font-size: 28px;
+    vertical-align: top;
+    margin-top: 12px;
+    display: inline-block;
+    color: var(--ocre);
+  }
+  .price-big sub {
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 600;
+    vertical-align: baseline;
+    color: var(--ocre-soft);
+    letter-spacing: 1px;
+  }
+  .price-desc {
+    font-family: var(--sans);
+    font-size: 9px;
+    font-weight: 300;
+    color: var(--sage-pale);
+    margin-top: 6px;
+    line-height: 1.45;
+    max-width: 150px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .price-divider {
+    border: none;
+    border-top: 1px solid rgba(244,237,216,0.18);
+    margin: 12px 0 10px;
+  }
+  .price-points {
+    list-style: none;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .price-points li {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-family: var(--sans);
+    font-size: 9px;
+    font-weight: 300;
+    color: var(--cream);
+  }
+  .check-circle {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    background: var(--sage);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .check-circle svg {
+    width: 8px;
+    height: 8px;
+  }
+  .price-cta {
+    display: block;
+    margin-top: 12px;
+    background: var(--ocre);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 9px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+  }
+
+  /* QR Card */
+  .qr-card {
+    background: var(--cream-pure);
+    border: 1.5px solid rgba(122,140,78,0.28);
+    border-radius: 12px;
+    padding: 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .qr-img {
+    width: 70px;
+    height: 70px;
+    flex-shrink: 0;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 2px solid var(--sage-pale);
+  }
+  .qr-img img {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  .qr-text {}
+  .qr-label {
+    font-family: var(--sans);
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 3px;
+  }
+  .qr-url {
+    font-family: var(--serif);
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--olive-deep);
+    line-height: 1.3;
+  }
+  .qr-sub {
+    font-family: var(--sans);
+    font-size: 8.5px;
+    font-weight: 300;
+    color: var(--ink-soft);
+    margin-top: 3px;
+  }
+
+  /* ── FOOTER BAR ── */
+  .footer-bar {
+    background: var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 36px;
+    margin-top: 20px;
+    flex-shrink: 0;
+  }
+  .footer-contact {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+  }
+  .fc-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--sans);
+    font-size: 9px;
+    font-weight: 300;
+    color: var(--cream);
+  }
+  .fc-item svg {
+    width: 12px;
+    height: 12px;
+    stroke: var(--ocre);
+    fill: none;
+    stroke-width: 2;
+    flex-shrink: 0;
+  }
+  .footer-mention {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 9.5px;
+    color: var(--sage-pale);
+    letter-spacing: 0.5px;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <svg class="leaf-top" width="90" height="90" viewBox="0 0 200 200" fill="none">
+      <path d="M100 20 Q140 60 130 110 Q120 160 100 180 Q80 160 70 110 Q60 60 100 20Z" fill="#C49A58"/>
+      <path d="M100 20 L100 180" stroke="#8C5E28" stroke-width="1.5"/>
+      <path d="M100 50 Q115 60 122 75 M100 70 Q88 80 78 95 M100 90 Q117 100 125 118" stroke="#8C5E28" stroke-width="1" opacity="0.7"/>
+    </svg>
+    <div class="header-inner">
+      <div class="brand-logo">
+        <div class="brand-name">EMPAUMA</div>
+        <div class="brand-sub">Conciergerie</div>
+        <div class="brand-tagline">Votre bien entre de bonnes mains</div>
+      </div>
+      <div class="header-region">
+        <div class="region-label">Zone d'intervention</div>
+        <div class="region-name">Provence-Alpes-<br>Côte d'Azur</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO STRIP -->
+  <div class="hero-strip">
+    <h1>Vos locations saisonnières en PACA,<br><em>gérées de A à Z.</em></h1>
+    <p>De la mise en ligne de votre annonce au départ de chaque voyageur — tranquillité totale garantie.</p>
+    <div class="trust-pills">
+      <div class="pill"><div class="pill-dot"></div>Un seul interlocuteur</div>
+      <div class="pill"><div class="pill-dot"></div>100 % prise en charge</div>
+      <div class="pill"><div class="pill-dot"></div>Zéro frais caché</div>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div class="body">
+
+    <!-- SERVICES -->
+    <div class="col-services">
+      <div class="col-title">✦ Nos services inclus</div>
+      <div class="services-list">
+
+        <div class="svc">
+          <div class="svc-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#F4EDD8" stroke-width="2">
+              <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+              <circle cx="12" cy="13" r="4"/>
+            </svg>
+          </div>
+          <div class="svc-text"><strong>Photos pro</strong>Clichés lumineux qui valorisent votre bien</div>
+        </div>
+
+        <div class="svc">
+          <div class="svc-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#F4EDD8" stroke-width="2">
+              <rect x="3" y="3" width="18" height="18" rx="2"/>
+              <path d="M3 9h18M9 21V9"/>
+            </svg>
+          </div>
+          <div class="svc-text"><strong>Annonces optimisées</strong>Airbnb, Booking, Abritel</div>
+        </div>
+
+        <div class="svc">
+          <div class="svc-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#F4EDD8" stroke-width="2">
+              <path d="M3 17l6-6 4 4 8-8"/><path d="M17 7h4v4"/>
+            </svg>
+          </div>
+          <div class="svc-text"><strong>Tarification dynamique</strong>Prix ajustés en temps réel</div>
+        </div>
+
+        <div class="svc">
+          <div class="svc-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#F4EDD8" stroke-width="2">
+              <rect x="3" y="4" width="18" height="18" rx="2"/>
+              <path d="M16 2v4M8 2v4M3 10h18"/>
+            </svg>
+          </div>
+          <div class="svc-text"><strong>Gestion réservations</strong>Calendriers & confirmations</div>
+        </div>
+
+        <div class="svc">
+          <div class="svc-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#F4EDD8" stroke-width="2">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+          </div>
+          <div class="svc-text"><strong>Comm. voyageurs 7j/7</strong>Réponses personnalisées</div>
+        </div>
+
+        <div class="svc">
+          <div class="svc-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#F4EDD8" stroke-width="2">
+              <rect x="3" y="11" width="18" height="11" rx="2"/>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            </svg>
+          </div>
+          <div class="svc-text"><strong>Arrivées automatisées</strong>Boîte à clés ou serrure connectée</div>
+        </div>
+
+        <div class="svc">
+          <div class="svc-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#F4EDD8" stroke-width="2">
+              <path d="M3 21v-4a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v4"/>
+              <path d="M3 7l9-4 9 4M12 3v10"/>
+            </svg>
+          </div>
+          <div class="svc-text"><strong>Ménage & blanchisserie</strong>Logement impeccable à chaque séjour</div>
+        </div>
+
+        <div class="svc">
+          <div class="svc-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#F4EDD8" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="16" y1="13" x2="8" y2="13"/>
+              <line x1="16" y1="17" x2="8" y2="17"/>
+            </svg>
+          </div>
+          <div class="svc-text"><strong>Démarches légales</strong>Déclaration mairie & conformité</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- DIVIDER -->
+    <div class="col-divider"></div>
+
+    <!-- RIGHT: PRICE + QR -->
+    <div class="col-right">
+
+      <!-- PRICE CARD -->
+      <div class="price-card">
+        <div class="price-ribbon">Tout inclus · Gestion complète</div>
+        <div class="price-label">Notre tarif</div>
+        <div class="price-big">
+          <sup>%</sup>20<sub> TTC</sub>
+        </div>
+        <p class="price-desc">du chiffre d'affaires généré par votre bien. Aucun frais fixe, aucune surprise.</p>
+        <hr class="price-divider">
+        <ul class="price-points">
+          <li>
+            <div class="check-circle">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#F4EDD8" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+            </div>
+            Transparence totale — reporting régulier
+          </li>
+          <li>
+            <div class="check-circle">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#F4EDD8" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+            </div>
+            Aucun frais fixe — payé sur vos gains
+          </li>
+          <li>
+            <div class="check-circle">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#F4EDD8" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+            </div>
+            Un seul contrat — gestion 100 % déléguée
+          </li>
+          <li>
+            <div class="check-circle">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#F4EDD8" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+            </div>
+            Ménage &amp; linge payés par les voyageurs
+          </li>
+        </ul>
+        <div class="price-cta">Confier mon bien →</div>
+      </div>
+
+      <!-- QR CARD -->
+      <div class="qr-card">
+        <div class="qr-img">
+          <img src="${qrDataUrl}" alt="QR Code empauma-conciergerie.fr">
+        </div>
+        <div class="qr-text">
+          <div class="qr-label">Notre site web</div>
+          <div class="qr-url">www.empauma-<br>conciergerie.fr</div>
+          <div class="qr-sub">Scannez pour nous découvrir</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER BAR -->
+  <div class="footer-bar">
+    <div class="footer-contact">
+      <div class="fc-item">
+        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.38 2 2 0 0 1 3.58 1.2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        contact@empauma-conciergerie.fr
+      </div>
+      <div class="fc-item">
+        <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        www.empauma-conciergerie.fr
+      </div>
+    </div>
+    <div class="footer-mention">Votre bien entre de bonnes mains — © 2026 Empauma</div>
+  </div>
+
+</div>
+</body>
+</html>`;
+
+  // Write HTML for inspection
+  const htmlPath = path.join(__dirname, '../public/flyer-empauma.html');
+  fs.writeFileSync(htmlPath, html, 'utf8');
+  console.log('✓ HTML written to public/flyer-empauma.html');
+
+  // Launch Puppeteer and generate PDF
+  const browser = await puppeteer.launch({
+    headless: true,
+    args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'],
+  });
+
+  const page = await browser.newPage();
+  await page.setContent(html, { waitUntil: 'networkidle0', timeout: 30000 });
+
+  // Wait for fonts to load
+  await new Promise(r => setTimeout(r, 1500));
+
+  const pdfPath = path.join(__dirname, '../public/flyer-empauma.pdf');
+  await page.pdf({
+    path: pdfPath,
+    width: '210mm',
+    height: '297mm',
+    printBackground: true,
+    margin: { top: 0, right: 0, bottom: 0, left: 0 },
+  });
+
+  await browser.close();
+  console.log('✓ PDF generated: public/flyer-empauma.pdf');
+}
+
+generateFlyer().catch(console.error);
