@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>Plaquette Empauma Conciergerie</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap');
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
   @page { size: A4 portrait; margin: 0; }
@@ -22,7 +22,7 @@
     background: #F4EDD8;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 12px 48px rgba(0,0,0,0.15);
+    box-shadow: 0 12px 48px rgba(0,0,0,0.18);
     page-break-after: always;
   }
   .page:last-child { page-break-after: avoid; }
@@ -32,8 +32,7 @@
     .page { margin: 0; box-shadow: none; width: 210mm; height: 297mm; }
   }
 
-  .illus { display: block; width: 100%; }
-
+  /* ── ORNEMENTS ── */
   .side-ornament {
     position: absolute;
     top: 50%;
@@ -42,30 +41,40 @@
     flex-direction: column;
     align-items: center;
     gap: 14px;
-    opacity: 0.4;
+    opacity: 0.35;
     z-index: 3;
   }
   .side-ornament.left { left: 9mm; }
   .side-ornament.right { right: 9mm; }
-  .side-ornament-line { width: 0.6px; height: 46px; background: #7A8C4E; }
+  .side-ornament-line { width: 0.6px; height: 52px; background: #7A8C4E; }
   .side-ornament-star { font-size: 9px; color: #7A8C4E; }
 
-  .ornement { display: flex; align-items: center; justify-content: center; gap: 16px; }
-  .ornement-line { width: 50px; height: 0.6px; background: #7A8C4E; opacity: 0.6; }
-  .ornement-star { font-size: 12px; color: #7A8C4E; letter-spacing: 2px; }
+  .ornement { display: flex; align-items: center; justify-content: center; gap: 18px; }
+  .ornement-line { width: 56px; height: 0.7px; background: #C49A58; opacity: 0.7; }
+  .ornement-star { font-size: 13px; color: #C49A58; letter-spacing: 2px; }
 
+  /* ── COUVERTURE ── */
   .cover {
-    background: #3D4F25;
+    background: linear-gradient(170deg, #2E3B1A 0%, #3D4F25 45%, #4A5E2E 100%);
     color: #F4EDD8;
     min-height: 297mm;
     display: flex;
     flex-direction: column;
     position: relative;
   }
+  .cover::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 70% 20%, rgba(196,154,88,0.12) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 1;
+  }
   .cover-illus-wrap {
     position: relative;
     height: 148mm;
     overflow: hidden;
+    z-index: 2;
   }
   .cover-illus-wrap svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 
@@ -76,68 +85,81 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 14mm 30mm 0;
+    padding: 14mm 28mm 0;
+    position: relative;
+    z-index: 2;
   }
   .cover-logo-name {
-    font-size: 62px;
+    font-size: 74px;
     font-weight: 300;
-    letter-spacing: 14px;
+    letter-spacing: 18px;
     color: #F4EDD8;
     line-height: 1;
-    margin: 18px 0 16px;
+    margin: 20px 0 18px;
+    text-shadow: 0 2px 24px rgba(196,154,88,0.18);
   }
-  .cover-logo-sep { width: 210px; height: 0.8px; background: #7A8C4E; margin: 0 auto 14px; }
+  .cover-logo-sep {
+    width: 220px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #C49A58, transparent);
+    margin: 0 auto 16px;
+  }
   .cover-logo-sub {
     font-family: 'Jost', Arial, sans-serif;
-    font-size: 13px;
-    letter-spacing: 8px;
-    color: #7A8C4E;
+    font-size: 14px;
+    letter-spacing: 10px;
+    color: #C49A58;
     text-transform: uppercase;
     font-weight: 300;
   }
   .cover-slogan {
-    font-size: 19px;
+    font-size: 22px;
     font-style: italic;
-    color: #C49A58;
-    margin-top: 18px;
-    letter-spacing: 1px;
+    font-weight: 300;
+    color: #F0D99A;
+    margin-top: 20px;
+    letter-spacing: 0.5px;
   }
-  .cover-baseline { margin-top: 30px; }
+  .cover-baseline { margin-top: 32px; }
   .cover-baseline-eyebrow {
     font-family: 'Jost', Arial, sans-serif;
     font-size: 10px;
-    letter-spacing: 6px;
+    letter-spacing: 7px;
     color: #7A8C4E;
     text-transform: uppercase;
-    margin-bottom: 12px;
+    margin-bottom: 13px;
   }
   .cover-baseline-text {
-    font-size: 21px;
+    font-size: 23px;
     font-style: italic;
     font-weight: 300;
     color: #F4EDD8;
-    line-height: 1.5;
-    max-width: 430px;
+    line-height: 1.55;
+    max-width: 420px;
     margin: 0 auto;
   }
   .cover-bottom {
     text-align: center;
     padding: 0 0 22mm;
+    position: relative;
+    z-index: 2;
   }
   .cover-bottom-text {
     font-family: 'Jost', Arial, sans-serif;
     font-size: 9px;
-    letter-spacing: 5px;
+    letter-spacing: 6px;
     color: #7A8C4E;
     text-transform: uppercase;
   }
 
+  /* ── PAGES INTÉRIEURES ── */
   .inner {
     padding: 20mm 22mm;
     min-height: 297mm;
     display: flex;
     flex-direction: column;
     position: relative;
+    background: linear-gradient(160deg, #F4EDD8 0%, #F0E8CF 60%, #EDE0C4 100%);
   }
   .inner-header {
     display: flex;
@@ -145,9 +167,14 @@
     justify-content: space-between;
     margin-bottom: 10mm;
     padding-bottom: 12px;
-    border-bottom: 0.5px solid #7A8C4E;
+    border-bottom: 0.5px solid #C49A58;
   }
-  .inner-header-logo { font-size: 16px; letter-spacing: 5px; color: #3A3018; }
+  .inner-header-logo {
+    font-size: 17px;
+    letter-spacing: 6px;
+    color: #3A3018;
+    font-weight: 400;
+  }
   .inner-header-section {
     font-family: 'Jost', Arial, sans-serif;
     font-size: 9px;
@@ -162,46 +189,62 @@
     text-align: center;
     font-family: 'Jost', Arial, sans-serif;
     font-size: 10px;
-    letter-spacing: 4px;
+    letter-spacing: 5px;
     color: #C49A58;
-    opacity: 0.7;
+    opacity: 0.75;
   }
+
+  /* ── TITRES & TEXTES ── */
   .section-eyebrow {
     font-family: 'Jost', Arial, sans-serif;
     font-size: 10px;
-    letter-spacing: 5px;
+    letter-spacing: 6px;
     color: #C49A58;
     text-transform: uppercase;
-    margin-bottom: 12px;
+    margin-bottom: 13px;
   }
   .section-title {
-    font-size: 36px;
+    font-size: 44px;
     font-weight: 300;
     color: #3A3018;
-    line-height: 1.1;
+    line-height: 1.08;
     margin-bottom: 6px;
   }
-  .section-title em { color: #7A8C4E; font-style: italic; }
-  .section-sep { width: 50px; height: 1px; background: #C49A58; margin: 16px 0 20px; }
-  .section-intro {
-    font-size: 14.5px;
-    color: #5C4A2A;
-    line-height: 1.75;
+  .section-title em {
+    color: #7A8C4E;
     font-style: italic;
-    margin-bottom: 20px;
+    font-weight: 300;
+  }
+  .section-sep {
+    width: 56px;
+    height: 2px;
+    background: linear-gradient(90deg, #C49A58, #8C5E28);
+    margin: 16px 0 20px;
+    border-radius: 2px;
+  }
+  .section-intro {
+    font-size: 16px;
+    color: #5C4A2A;
+    line-height: 1.8;
+    font-style: italic;
+    font-weight: 300;
+    margin-bottom: 22px;
     max-width: 94%;
   }
 
+  /* ── BANDE ILLUS ── */
   .inner-illus-band {
     height: 42mm;
-    border-radius: 6px;
+    border-radius: 8px;
     overflow: hidden;
     margin-bottom: 20px;
     position: relative;
-    border: 0.5px solid #7A8C4E;
+    border: 0.5px solid rgba(122,140,78,0.5);
+    box-shadow: 0 2px 12px rgba(61,79,37,0.08);
   }
   .inner-illus-band svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 
+  /* ── CONCEPT GRID ── */
   .concept-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -209,37 +252,50 @@
     margin-top: 4px;
   }
   .concept-card {
-    background: #EDE6D0;
-    border-left: 2px solid #7A8C4E;
-    padding: 16px 18px;
-    border-radius: 0 6px 6px 0;
+    background: linear-gradient(135deg, #EDE6D0 0%, #E5D9BE 100%);
+    border-left: 3px solid #7A8C4E;
+    padding: 17px 18px;
+    border-radius: 0 8px 8px 0;
+    box-shadow: 0 2px 8px rgba(61,79,37,0.07);
   }
-  .concept-card-icon { font-size: 20px; color: #C49A58; margin-bottom: 5px; }
+  .concept-card-icon { font-size: 18px; color: #C49A58; margin-bottom: 6px; }
   .concept-card-title {
     font-family: 'Jost', Arial, sans-serif;
     font-size: 10px;
     letter-spacing: 2px;
     color: #3D4F25;
     text-transform: uppercase;
-    font-weight: 500;
-    margin-bottom: 5px;
+    font-weight: 600;
+    margin-bottom: 6px;
   }
-  .concept-card-text { font-size: 12px; color: #5C4A2A; line-height: 1.6; opacity: 0.9; }
+  .concept-card-text { font-size: 13px; color: #5C4A2A; line-height: 1.65; }
 
   .concept-quote {
     margin-top: 20px;
-    padding: 22px 26px;
-    background: #3D4F25;
-    border-radius: 6px;
+    padding: 24px 28px;
+    background: linear-gradient(135deg, #3D4F25 0%, #2E3B1A 100%);
+    border-radius: 8px;
     text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .concept-quote::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 120px; height: 120px;
+    background: radial-gradient(circle, rgba(196,154,88,0.15) 0%, transparent 70%);
   }
   .concept-quote-text {
-    font-size: 15.5px;
+    font-size: 17px;
     font-style: italic;
+    font-weight: 300;
     color: #F4EDD8;
-    line-height: 1.6;
+    line-height: 1.65;
     max-width: 480px;
     margin: 0 auto;
+    position: relative;
+    z-index: 1;
   }
   .concept-quote-author {
     font-family: 'Jost', Arial, sans-serif;
@@ -247,9 +303,12 @@
     letter-spacing: 4px;
     color: #C49A58;
     text-transform: uppercase;
-    margin-top: 12px;
+    margin-top: 14px;
+    position: relative;
+    z-index: 1;
   }
 
+  /* ── KPI GRID ── */
   .kpi-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -257,33 +316,53 @@
     margin: 4px 0 24px;
   }
   .kpi-card {
-    background: #3D4F25;
+    background: linear-gradient(140deg, #3D4F25 0%, #2E3B1A 100%);
     color: #F4EDD8;
-    padding: 20px 10px;
-    border-radius: 6px;
+    padding: 22px 10px;
+    border-radius: 8px;
     text-align: center;
+    box-shadow: 0 4px 14px rgba(61,79,37,0.2);
+    position: relative;
+    overflow: hidden;
+  }
+  .kpi-card::after {
+    content: '';
+    position: absolute;
+    top: -20px; right: -20px;
+    width: 70px; height: 70px;
+    background: radial-gradient(circle, rgba(196,154,88,0.18) 0%, transparent 70%);
   }
   .kpi-card.gold {
-    background: #F4EDD8;
+    background: linear-gradient(140deg, #F4EDD8 0%, #EDE0C4 100%);
     border: 1.5px solid #C49A58;
     color: #3A3018;
+    box-shadow: 0 4px 14px rgba(196,154,88,0.15);
+  }
+  .kpi-card.gold::after {
+    background: radial-gradient(circle, rgba(140,94,40,0.1) 0%, transparent 70%);
   }
   .kpi-number {
-    font-size: 38px;
+    font-size: 42px;
     font-weight: 300;
     color: #C49A58;
     line-height: 1;
-    margin-bottom: 6px;
+    margin-bottom: 7px;
+    position: relative;
+    z-index: 1;
   }
   .kpi-card.gold .kpi-number { color: #8C5E28; }
   .kpi-label {
     font-family: 'Jost', Arial, sans-serif;
-    font-size: 8px;
+    font-size: 8.5px;
     letter-spacing: 2px;
     text-transform: uppercase;
-    opacity: 0.85;
+    opacity: 0.9;
     line-height: 1.4;
+    position: relative;
+    z-index: 1;
   }
+
+  /* ── COMPARAISON ── */
   .comparison-eyebrow {
     font-family: 'Jost', Arial, sans-serif;
     font-size: 10px;
@@ -297,17 +376,25 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     border: 0.5px solid #7A8C4E;
-    border-radius: 6px;
+    border-radius: 8px;
     overflow: hidden;
+    box-shadow: 0 2px 12px rgba(61,79,37,0.08);
   }
   .comparison-col { padding: 16px 18px; }
-  .comparison-col.before { background: #EDE6D0; border-right: 0.5px solid #7A8C4E; }
-  .comparison-col.after { background: #3D4F25; color: #F4EDD8; }
+  .comparison-col.before {
+    background: linear-gradient(160deg, #EDE6D0 0%, #E5D9BE 100%);
+    border-right: 0.5px solid #7A8C4E;
+  }
+  .comparison-col.after {
+    background: linear-gradient(160deg, #3D4F25 0%, #2E3B1A 100%);
+    color: #F4EDD8;
+  }
   .comparison-col-title {
     font-family: 'Jost', Arial, sans-serif;
     font-size: 10px;
     letter-spacing: 3px;
     text-transform: uppercase;
+    font-weight: 600;
     margin-bottom: 12px;
     padding-bottom: 8px;
     border-bottom: 0.5px solid rgba(122, 140, 78, 0.4);
@@ -318,8 +405,8 @@
     display: flex;
     align-items: flex-start;
     gap: 8px;
-    font-size: 11.5px;
-    line-height: 1.5;
+    font-size: 12.5px;
+    line-height: 1.55;
     margin-bottom: 8px;
     color: #5C4A2A;
   }
@@ -327,18 +414,19 @@
   .comparison-item-icon { flex-shrink: 0; font-size: 10px; color: #8C5E28; margin-top: 2px; }
   .comparison-col.after .comparison-item-icon { color: #C49A58; }
 
-  .services-list { display: flex; flex-direction: column; gap: 10px; margin-top: 4px; }
+  /* ── SERVICES ── */
+  .services-list { display: flex; flex-direction: column; gap: 9px; margin-top: 4px; }
   .service-row {
     display: grid;
     grid-template-columns: 44px 1fr;
     gap: 16px;
     align-items: flex-start;
-    padding-bottom: 10px;
-    border-bottom: 0.5px solid rgba(122, 140, 78, 0.25);
+    padding-bottom: 9px;
+    border-bottom: 0.5px solid rgba(122, 140, 78, 0.22);
   }
   .service-row:last-child { border-bottom: none; }
   .service-number {
-    font-size: 26px;
+    font-size: 28px;
     font-weight: 300;
     color: #C49A58;
     line-height: 1;
@@ -350,66 +438,91 @@
     letter-spacing: 2px;
     color: #3D4F25;
     text-transform: uppercase;
-    font-weight: 500;
+    font-weight: 600;
     margin-bottom: 3px;
   }
-  .service-desc { font-size: 12px; color: #5C4A2A; line-height: 1.55; opacity: 0.9; }
+  .service-desc { font-size: 13px; color: #5C4A2A; line-height: 1.55; }
   .options-badge {
     display: inline-block;
-    background: #C49A58;
+    background: linear-gradient(90deg, #C49A58, #A07840);
     color: #F4EDD8;
     font-family: 'Jost', Arial, sans-serif;
     font-size: 8px;
     letter-spacing: 2px;
-    padding: 2px 8px;
+    padding: 2px 9px;
     border-radius: 3px;
     margin-bottom: 5px;
     text-transform: uppercase;
   }
 
+  /* ── TÉMOIGNAGE ── */
   .testimonial-block {
-    background: #3D4F25;
-    border-radius: 8px;
-    padding: 26px 30px;
+    background: linear-gradient(135deg, #3D4F25 0%, #2A3818 100%);
+    border-radius: 10px;
+    padding: 28px 32px;
     margin-bottom: 22px;
     position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 18px rgba(61,79,37,0.22);
+  }
+  .testimonial-block::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 160px; height: 160px;
+    background: radial-gradient(circle, rgba(196,154,88,0.13) 0%, transparent 70%);
+  }
+  .testimonial-block::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 100px; height: 100px;
+    background: radial-gradient(circle, rgba(122,140,78,0.1) 0%, transparent 70%);
   }
   .testimonial-quote-mark {
-    font-size: 72px;
+    font-size: 80px;
     color: #C49A58;
     line-height: 1;
     font-style: italic;
-    opacity: 0.5;
+    opacity: 0.45;
     position: absolute;
-    top: 10px;
-    left: 20px;
+    top: 8px;
+    left: 18px;
+    z-index: 1;
   }
   .testimonial-text {
-    font-size: 15px;
+    font-size: 16px;
     font-style: italic;
+    font-weight: 300;
     color: #F4EDD8;
-    line-height: 1.65;
-    padding-left: 28px;
-    padding-top: 14px;
+    line-height: 1.7;
+    padding-left: 30px;
+    padding-top: 18px;
+    position: relative;
+    z-index: 2;
   }
   .testimonial-author {
-    margin-top: 16px;
-    padding-left: 28px;
+    margin-top: 18px;
+    padding-left: 30px;
     display: flex;
     align-items: center;
     gap: 14px;
+    position: relative;
+    z-index: 2;
   }
   .testimonial-author-avatar {
-    width: 38px;
-    height: 38px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    background: #7A8C4E;
+    background: linear-gradient(135deg, #7A8C4E, #5A6838);
     display: flex;
     align-items: center;
     justify-content: center;
     color: #F4EDD8;
-    font-size: 14px;
+    font-size: 16px;
+    font-weight: 500;
     flex-shrink: 0;
+    border: 1.5px solid rgba(196,154,88,0.4);
   }
   .testimonial-author-name {
     font-family: 'Jost', Arial, sans-serif;
@@ -417,81 +530,107 @@
     letter-spacing: 2px;
     color: #C49A58;
     text-transform: uppercase;
-    margin-bottom: 2px;
+    margin-bottom: 3px;
+    font-weight: 500;
   }
   .testimonial-author-detail {
-    font-size: 11px;
+    font-size: 12px;
     color: #F4EDD8;
     opacity: 0.75;
     font-style: italic;
   }
+  .testimonial-stars {
+    display: flex;
+    gap: 3px;
+    padding-left: 30px;
+    margin-bottom: 2px;
+    position: relative;
+    z-index: 2;
+  }
+  .star { color: #C49A58; font-size: 12px; }
+
+  /* ── PROCESSUS ── */
   .process-list { display: flex; flex-direction: column; gap: 0; margin-top: 6px; }
   .process-step { display: flex; gap: 18px; align-items: flex-start; padding-bottom: 13px; }
   .process-step:last-child { padding-bottom: 0; }
   .process-step-nb-wrap { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
   .process-step-nb {
-    width: 30px;
-    height: 30px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
-    background: #3D4F25;
+    background: linear-gradient(135deg, #3D4F25, #2A3818);
     color: #F4EDD8;
     font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 14px;
+    font-size: 15px;
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0 2px 8px rgba(61,79,37,0.2);
   }
-  .process-step-line { width: 1px; flex: 1; background: #7A8C4E; opacity: 0.3; margin-top: 4px; min-height: 16px; }
-  .process-step-content { padding-top: 3px; flex: 1; }
+  .process-step-line { width: 1px; flex: 1; background: linear-gradient(to bottom, #7A8C4E, transparent); opacity: 0.4; margin-top: 4px; min-height: 16px; }
+  .process-step-content { padding-top: 4px; flex: 1; }
   .process-step-title {
     font-family: 'Jost', Arial, sans-serif;
     font-size: 11px;
     letter-spacing: 2px;
     color: #3D4F25;
     text-transform: uppercase;
-    font-weight: 500;
+    font-weight: 600;
     margin-bottom: 3px;
   }
-  .process-step-desc { font-size: 12px; color: #5C4A2A; line-height: 1.5; font-style: italic; opacity: 0.9; }
+  .process-step-desc { font-size: 13px; color: #5C4A2A; line-height: 1.55; font-style: italic; }
 
-  .faq-list { display: flex; flex-direction: column; gap: 12px; margin-top: 4px; margin-bottom: 20px; }
+  /* ── FAQ ── */
+  .faq-list { display: flex; flex-direction: column; gap: 11px; margin-top: 4px; margin-bottom: 20px; }
   .faq-item {
     padding: 13px 18px;
-    background: #EDE6D0;
-    border-left: 2px solid #C49A58;
-    border-radius: 0 6px 6px 0;
+    background: linear-gradient(135deg, #EDE6D0 0%, #E5D9BE 100%);
+    border-left: 3px solid #C49A58;
+    border-radius: 0 8px 8px 0;
+    box-shadow: 0 2px 6px rgba(140,94,40,0.07);
   }
   .faq-question {
     font-family: 'Jost', Arial, sans-serif;
-    font-size: 11px;
+    font-size: 11.5px;
     letter-spacing: 1px;
     color: #3D4F25;
-    font-weight: 500;
+    font-weight: 600;
     margin-bottom: 5px;
   }
-  .faq-answer { font-size: 12px; color: #5C4A2A; line-height: 1.6; opacity: 0.9; }
+  .faq-answer { font-size: 13px; color: #5C4A2A; line-height: 1.62; }
 
+  /* ── CONTACT FINAL ── */
   .contact-final {
-    background: #3D4F25;
-    border-radius: 8px;
+    background: linear-gradient(135deg, #3D4F25 0%, #2A3818 100%);
+    border-radius: 10px;
     padding: 26px;
     margin-top: auto;
     display: grid;
     grid-template-columns: 1fr auto;
     gap: 24px;
     align-items: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 18px rgba(61,79,37,0.22);
   }
-  .contact-final-content { color: #F4EDD8; }
+  .contact-final::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: 60px;
+    width: 180px; height: 180px;
+    background: radial-gradient(circle, rgba(196,154,88,0.12) 0%, transparent 70%);
+  }
+  .contact-final-content { color: #F4EDD8; position: relative; z-index: 1; }
   .contact-final-eyebrow {
     font-family: 'Jost', Arial, sans-serif;
     font-size: 9px;
-    letter-spacing: 4px;
+    letter-spacing: 5px;
     color: #C49A58;
     text-transform: uppercase;
-    margin-bottom: 8px;
+    margin-bottom: 9px;
   }
   .contact-final-title {
-    font-size: 21px;
+    font-size: 24px;
     font-weight: 300;
     font-style: italic;
     color: #F4EDD8;
@@ -499,7 +638,7 @@
     margin-bottom: 6px;
   }
   .contact-final-sub {
-    font-size: 12.5px;
+    font-size: 13px;
     color: #F4EDD8;
     opacity: 0.85;
     margin-bottom: 14px;
@@ -511,14 +650,14 @@
     gap: 5px;
     margin-top: 12px;
     padding-top: 12px;
-    border-top: 0.5px solid rgba(122, 140, 78, 0.4);
+    border-top: 0.5px solid rgba(196,154,88,0.35);
   }
   .contact-final-line {
     display: flex;
     align-items: baseline;
     gap: 8px;
     font-family: 'Jost', Arial, sans-serif;
-    font-size: 11px;
+    font-size: 11.5px;
   }
   .contact-final-line-label {
     color: #7A8C4E;
@@ -529,7 +668,17 @@
   }
   .contact-final-line-val { color: #F4EDD8; }
   .contact-final-line-val.gold { color: #C49A58; }
-  .qr-block { text-align: center; background: #F4EDD8; padding: 14px; border-radius: 6px; }
+
+  /* ── QR BLOCK ── */
+  .qr-block {
+    text-align: center;
+    background: #F4EDD8;
+    padding: 14px;
+    border-radius: 8px;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+  }
   .qr-svg { width: 108px; height: 108px; display: block; }
   .qr-label {
     font-family: 'Jost', Arial, sans-serif;
@@ -543,14 +692,16 @@
 </head>
 <body>
 
-<!-- PAGE 1 — COUVERTURE -->
+<!-- ═══════════════════════════════════════════════
+     PAGE 1 — COUVERTURE
+═══════════════════════════════════════════════ -->
 <div class="page">
   <div class="cover">
     <div class="cover-illus-wrap">
       <svg viewBox="0 0 800 560" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#E8D5A8"/><stop offset="45%" stop-color="#E5C998"/><stop offset="100%" stop-color="#D9B888"/>
+            <stop offset="0%" stop-color="#EDD9AA"/><stop offset="45%" stop-color="#E8CB96"/><stop offset="100%" stop-color="#DEBA82"/>
           </linearGradient>
           <linearGradient id="hillBack" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stop-color="#8B9668"/><stop offset="100%" stop-color="#7A8C4E"/>
@@ -558,25 +709,37 @@
           <linearGradient id="hillFront" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stop-color="#6B7A42"/><stop offset="100%" stop-color="#5A6838"/>
           </linearGradient>
+          <linearGradient id="sunGlow" x1="0.5" y1="0" x2="0.5" y2="1">
+            <stop offset="0%" stop-color="#F5E4B0" stop-opacity="0.9"/><stop offset="100%" stop-color="#EFD080" stop-opacity="0.7"/>
+          </linearGradient>
+          <radialGradient id="sunHalo" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#F5E4B0" stop-opacity="0.35"/>
+            <stop offset="60%" stop-color="#EFD080" stop-opacity="0.15"/>
+            <stop offset="100%" stop-color="#EFD080" stop-opacity="0"/>
+          </radialGradient>
         </defs>
         <rect width="800" height="560" fill="url(#sky)"/>
-        <circle cx="560" cy="180" r="48" fill="#F0E0B0" opacity="0.9"/>
-        <circle cx="560" cy="180" r="68" fill="#F0E0B0" opacity="0.25"/>
+        <!-- Halo + soleil -->
+        <circle cx="560" cy="175" r="90" fill="url(#sunHalo)"/>
+        <circle cx="560" cy="175" r="50" fill="url(#sunGlow)"/>
+        <!-- Collines arrière -->
         <path d="M0,300 Q150,250 320,290 Q480,330 650,275 Q740,250 800,280 L800,560 L0,560 Z" fill="url(#hillBack)" opacity="0.55"/>
         <path d="M0,360 Q180,310 380,350 Q560,385 800,335 L800,560 L0,560 Z" fill="url(#hillBack)"/>
+        <!-- Cyprès arrière -->
         <g opacity="0.9">
           <ellipse cx="120" cy="338" rx="9" ry="30" fill="#3D4F25"/><ellipse cx="145" cy="345" rx="7" ry="24" fill="#3D4F25"/>
           <ellipse cx="690" cy="330" rx="9" ry="32" fill="#3D4F25"/><ellipse cx="712" cy="338" rx="7" ry="25" fill="#3D4F25"/>
           <ellipse cx="668" cy="340" rx="6" ry="20" fill="#3D4F25"/>
         </g>
+        <!-- Mas -->
         <g>
           <rect x="320" y="300" width="160" height="95" fill="#EFE3C8"/>
           <rect x="320" y="300" width="160" height="95" fill="none" stroke="#C4A878" stroke-width="1"/>
-          <polygon points="305,300 400,255 495,300" fill="#B5703F"/>
+          <polygon points="305,300 400,255 495,300" fill="#C27A42"/>
           <polygon points="305,300 400,255 495,300" fill="none" stroke="#9A5E32" stroke-width="1"/>
           <rect x="290" y="330" width="42" height="65" fill="#E5D7B8"/>
           <rect x="290" y="330" width="42" height="65" fill="none" stroke="#C4A878" stroke-width="1"/>
-          <polygon points="282,330 311,305 340,330" fill="#B5703F"/>
+          <polygon points="282,330 311,305 340,330" fill="#C27A42"/>
           <rect x="430" y="262" width="12" height="20" fill="#E5D7B8" stroke="#C4A878" stroke-width="0.8"/>
           <path d="M385,395 L385,355 Q400,340 415,355 L415,395 Z" fill="#7A5A34"/>
           <rect x="338" y="325" width="20" height="24" fill="#9DB4C0"/>
@@ -589,26 +752,35 @@
           <rect x="338" y="360" width="20" height="22" fill="#9DB4C0"/>
           <rect x="442" y="360" width="20" height="22" fill="#9DB4C0"/>
         </g>
+        <!-- Arbres ronds -->
         <g>
-          <rect x="232" y="375" width="6" height="22" fill="#6B5A3A"/><circle cx="235" cy="365" r="20" fill="#8B9668"/>
+          <rect x="232" y="375" width="6" height="22" fill="#6B5A3A"/>
+          <circle cx="235" cy="365" r="20" fill="#8B9668"/>
           <circle cx="223" cy="372" r="13" fill="#7A8757"/><circle cx="247" cy="370" r="14" fill="#9BA678"/>
-          <rect x="560" y="378" width="6" height="22" fill="#6B5A3A"/><circle cx="563" cy="368" r="22" fill="#8B9668"/>
+          <rect x="560" y="378" width="6" height="22" fill="#6B5A3A"/>
+          <circle cx="563" cy="368" r="22" fill="#8B9668"/>
           <circle cx="549" cy="375" r="14" fill="#7A8757"/><circle cx="577" cy="373" r="15" fill="#9BA678"/>
         </g>
+        <!-- Colline avant -->
         <path d="M0,420 Q200,385 420,415 Q620,442 800,400 L800,560 L0,560 Z" fill="url(#hillFront)"/>
-        <g opacity="0.8"><g fill="#8B7BA8">
-          <ellipse cx="80" cy="470" rx="4" ry="14"/><ellipse cx="110" cy="478" rx="4" ry="14"/>
-          <ellipse cx="140" cy="468" rx="4" ry="14"/><ellipse cx="170" cy="480" rx="4" ry="14"/>
-          <ellipse cx="200" cy="472" rx="4" ry="14"/><ellipse cx="600" cy="475" rx="4" ry="14"/>
-          <ellipse cx="630" cy="482" rx="4" ry="14"/><ellipse cx="660" cy="470" rx="4" ry="14"/>
-          <ellipse cx="690" cy="481" rx="4" ry="14"/><ellipse cx="720" cy="473" rx="4" ry="14"/>
-        </g></g>
+        <!-- Lavande -->
+        <g opacity="0.8">
+          <g fill="#9B8CC0">
+            <ellipse cx="80" cy="470" rx="4" ry="14"/><ellipse cx="110" cy="478" rx="4" ry="14"/>
+            <ellipse cx="140" cy="468" rx="4" ry="14"/><ellipse cx="170" cy="480" rx="4" ry="14"/>
+            <ellipse cx="200" cy="472" rx="4" ry="14"/><ellipse cx="600" cy="475" rx="4" ry="14"/>
+            <ellipse cx="630" cy="482" rx="4" ry="14"/><ellipse cx="660" cy="470" rx="4" ry="14"/>
+            <ellipse cx="690" cy="481" rx="4" ry="14"/><ellipse cx="720" cy="473" rx="4" ry="14"/>
+          </g>
+        </g>
         <rect x="0" y="500" width="800" height="60" fill="#3D4F25" opacity="0.15"/>
-        <rect x="0" y="540" width="800" height="20" fill="#3D4F25" opacity="0.4"/>
+        <rect x="0" y="540" width="800" height="20" fill="#3D4F25" opacity="0.45"/>
       </svg>
     </div>
     <div class="cover-content">
-      <div class="ornement"><div class="ornement-line"></div><span class="ornement-star">&#10022;</span><div class="ornement-line"></div></div>
+      <div class="ornement">
+        <div class="ornement-line"></div><span class="ornement-star">&#10022;</span><div class="ornement-line"></div>
+      </div>
       <div class="cover-logo-name">EMPAUMA</div>
       <div class="cover-logo-sep"></div>
       <div class="cover-logo-sub">CONCIERGERIE</div>
@@ -617,55 +789,90 @@
         <div class="cover-baseline-eyebrow">Présentation</div>
         <div class="cover-baseline-text">La conciergerie sur mesure pour propriétaires de locations saisonnières</div>
       </div>
-      <div class="ornement" style="margin-top: 26px;"><div class="ornement-line"></div><span class="ornement-star">&#10022;</span><div class="ornement-line"></div></div>
+      <div class="ornement" style="margin-top: 28px;">
+        <div class="ornement-line"></div><span class="ornement-star">&#10022;</span><div class="ornement-line"></div>
+      </div>
     </div>
     <div class="cover-bottom"><div class="cover-bottom-text">empauma-conciergerie.fr</div></div>
   </div>
 </div>
 
-<!-- PAGE 2 — LE CONCEPT -->
+<!-- ═══════════════════════════════════════════════
+     PAGE 2 — LE CONCEPT
+═══════════════════════════════════════════════ -->
 <div class="page">
   <div class="side-ornament left"><div class="side-ornament-line"></div><span class="side-ornament-star">&#10022;</span><div class="side-ornament-line"></div></div>
   <div class="side-ornament right"><div class="side-ornament-line"></div><span class="side-ornament-star">&#10022;</span><div class="side-ornament-line"></div></div>
   <div class="inner">
-    <div class="inner-header"><div class="inner-header-logo">EMPAUMA</div><div class="inner-header-section">Notre concept</div></div>
+    <div class="inner-header">
+      <div class="inner-header-logo">EMPAUMA</div>
+      <div class="inner-header-section">Notre concept</div>
+    </div>
     <div class="section-eyebrow">Notre approche</div>
     <h1 class="section-title">Une conciergerie,<br><em>une promesse.</em></h1>
     <div class="section-sep"></div>
     <p class="section-intro">Empauma — du verbe provençal "empaumar" — signifie "prendre en main, tenir dans la paume avec soin". C'est exactement ce que nous offrons aux propriétaires : un service complet, attentif et discret, pour transformer votre bien en une source de revenus sereine.</p>
     <div class="inner-illus-band">
       <svg viewBox="0 0 760 160" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-        <rect width="760" height="160" fill="#EDE6D0"/>
+        <defs>
+          <linearGradient id="bandBg2" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#EDE6D0"/><stop offset="100%" stop-color="#E2D8BF"/>
+          </linearGradient>
+        </defs>
+        <rect width="760" height="160" fill="url(#bandBg2)"/>
         <circle cx="380" cy="80" r="30" fill="none" stroke="#C49A58" stroke-width="1.5" opacity="0.6"/>
+        <circle cx="380" cy="80" r="50" fill="none" stroke="#C49A58" stroke-width="0.5" opacity="0.25"/>
         <g stroke="#C49A58" stroke-width="1.5" opacity="0.5">
-          <line x1="380" y1="30" x2="380" y2="14"/><line x1="380" y1="146" x2="380" y2="130"/>
-          <line x1="330" y1="80" x2="314" y2="80"/><line x1="446" y1="80" x2="430" y2="80"/>
-          <line x1="345" y1="45" x2="334" y2="34"/><line x1="415" y1="45" x2="426" y2="34"/>
-          <line x1="345" y1="115" x2="334" y2="126"/><line x1="415" y1="115" x2="426" y2="126"/>
+          <line x1="380" y1="28" x2="380" y2="12"/><line x1="380" y1="148" x2="380" y2="132"/>
+          <line x1="328" y1="80" x2="312" y2="80"/><line x1="448" y1="80" x2="432" y2="80"/>
+          <line x1="344" y1="44" x2="333" y2="33"/><line x1="416" y1="44" x2="427" y2="33"/>
+          <line x1="344" y1="116" x2="333" y2="127"/><line x1="416" y1="116" x2="427" y2="127"/>
         </g>
-        <g transform="translate(120,80)">
+        <g transform="translate(110,80)">
           <path d="M0,0 Q90,-10 200,4" fill="none" stroke="#7A8C4E" stroke-width="2"/>
           <g fill="#7A8C4E">
-            <ellipse cx="30" cy="-8" rx="13" ry="5" transform="rotate(-25 30 -8)"/><ellipse cx="62" cy="-10" rx="13" ry="5" transform="rotate(-20 62 -10)"/>
-            <ellipse cx="95" cy="-9" rx="13" ry="5" transform="rotate(-15 95 -9)"/><ellipse cx="48" cy="10" rx="13" ry="5" transform="rotate(20 48 10)"/>
-            <ellipse cx="80" cy="11" rx="13" ry="5" transform="rotate(18 80 11)"/><ellipse cx="112" cy="10" rx="13" ry="5" transform="rotate(15 112 10)"/>
+            <ellipse cx="30" cy="-8" rx="14" ry="5.5" transform="rotate(-25 30 -8)"/>
+            <ellipse cx="62" cy="-10" rx="14" ry="5.5" transform="rotate(-20 62 -10)"/>
+            <ellipse cx="95" cy="-9" rx="14" ry="5.5" transform="rotate(-15 95 -9)"/>
+            <ellipse cx="48" cy="10" rx="14" ry="5.5" transform="rotate(20 48 10)"/>
+            <ellipse cx="80" cy="11" rx="14" ry="5.5" transform="rotate(18 80 11)"/>
+            <ellipse cx="112" cy="10" rx="14" ry="5.5" transform="rotate(15 112 10)"/>
           </g>
         </g>
-        <g transform="translate(640,80) scale(-1,1)">
+        <g transform="translate(650,80) scale(-1,1)">
           <path d="M0,0 Q90,-10 200,4" fill="none" stroke="#7A8C4E" stroke-width="2"/>
           <g fill="#7A8C4E">
-            <ellipse cx="30" cy="-8" rx="13" ry="5" transform="rotate(-25 30 -8)"/><ellipse cx="62" cy="-10" rx="13" ry="5" transform="rotate(-20 62 -10)"/>
-            <ellipse cx="95" cy="-9" rx="13" ry="5" transform="rotate(-15 95 -9)"/><ellipse cx="48" cy="10" rx="13" ry="5" transform="rotate(20 48 10)"/>
-            <ellipse cx="80" cy="11" rx="13" ry="5" transform="rotate(18 80 11)"/><ellipse cx="112" cy="10" rx="13" ry="5" transform="rotate(15 112 10)"/>
+            <ellipse cx="30" cy="-8" rx="14" ry="5.5" transform="rotate(-25 30 -8)"/>
+            <ellipse cx="62" cy="-10" rx="14" ry="5.5" transform="rotate(-20 62 -10)"/>
+            <ellipse cx="95" cy="-9" rx="14" ry="5.5" transform="rotate(-15 95 -9)"/>
+            <ellipse cx="48" cy="10" rx="14" ry="5.5" transform="rotate(20 48 10)"/>
+            <ellipse cx="80" cy="11" rx="14" ry="5.5" transform="rotate(18 80 11)"/>
+            <ellipse cx="112" cy="10" rx="14" ry="5.5" transform="rotate(15 112 10)"/>
           </g>
         </g>
       </svg>
     </div>
     <div class="concept-grid">
-      <div class="concept-card"><div class="concept-card-icon">&#10022;</div><div class="concept-card-title">Un interlocuteur unique</div><div class="concept-card-text">Plus de coordination compliquée. Un seul contact dédié à votre bien, de la mise en ligne au départ de chaque voyageur.</div></div>
-      <div class="concept-card"><div class="concept-card-icon">&#10022;</div><div class="concept-card-title">Service sur mesure</div><div class="concept-card-text">Chaque logement est unique. Nous adaptons notre accompagnement à vos attentes, à votre bien et à vos voyageurs.</div></div>
-      <div class="concept-card"><div class="concept-card-icon">&#10022;</div><div class="concept-card-title">Esprit provençal</div><div class="concept-card-text">Ancrée dans le Var et la Provence, notre conciergerie cultive un art de recevoir chaleureux, raffiné et authentique.</div></div>
-      <div class="concept-card"><div class="concept-card-icon">&#10022;</div><div class="concept-card-title">Transparence totale</div><div class="concept-card-text">Reporting régulier, facturation claire, suivi détaillé. Vous savez à tout moment où en est votre bien et vos revenus.</div></div>
+      <div class="concept-card">
+        <div class="concept-card-icon">&#10022;</div>
+        <div class="concept-card-title">Un interlocuteur unique</div>
+        <div class="concept-card-text">Plus de coordination compliquée. Un seul contact dédié à votre bien, de la mise en ligne au départ de chaque voyageur.</div>
+      </div>
+      <div class="concept-card">
+        <div class="concept-card-icon">&#10022;</div>
+        <div class="concept-card-title">Service sur mesure</div>
+        <div class="concept-card-text">Chaque logement est unique. Nous adaptons notre accompagnement à vos attentes, à votre bien et à vos voyageurs.</div>
+      </div>
+      <div class="concept-card">
+        <div class="concept-card-icon">&#10022;</div>
+        <div class="concept-card-title">Esprit provençal</div>
+        <div class="concept-card-text">Ancrée dans le Var et la Provence, notre conciergerie cultive un art de recevoir chaleureux, raffiné et authentique.</div>
+      </div>
+      <div class="concept-card">
+        <div class="concept-card-icon">&#10022;</div>
+        <div class="concept-card-title">Transparence totale</div>
+        <div class="concept-card-text">Reporting régulier, facturation claire, suivi détaillé. Vous savez à tout moment où en est votre bien et vos revenus.</div>
+      </div>
     </div>
     <div class="concept-quote">
       <div class="concept-quote-text">"Nous prenons soin de votre bien comme s'il était le nôtre, pour que chaque voyageur reparte avec le sourire."</div>
@@ -675,24 +882,45 @@
   </div>
 </div>
 
-<!-- PAGE 3 — CHIFFRES CLÉS + COMPARAISON -->
+<!-- ═══════════════════════════════════════════════
+     PAGE 3 — CHIFFRES CLÉS + COMPARAISON
+═══════════════════════════════════════════════ -->
 <div class="page">
   <div class="side-ornament left"><div class="side-ornament-line"></div><span class="side-ornament-star">&#10022;</span><div class="side-ornament-line"></div></div>
   <div class="side-ornament right"><div class="side-ornament-line"></div><span class="side-ornament-star">&#10022;</span><div class="side-ornament-line"></div></div>
   <div class="inner">
-    <div class="inner-header"><div class="inner-header-logo">EMPAUMA</div><div class="inner-header-section">Pourquoi nous choisir</div></div>
+    <div class="inner-header">
+      <div class="inner-header-logo">EMPAUMA</div>
+      <div class="inner-header-section">Pourquoi nous choisir</div>
+    </div>
     <div class="section-eyebrow">Notre engagement</div>
     <h1 class="section-title">Des résultats<br><em>concrets.</em></h1>
     <div class="section-sep"></div>
     <div class="kpi-grid">
-      <div class="kpi-card"><div class="kpi-number">100%</div><div class="kpi-label">Prise en charge</div></div>
-      <div class="kpi-card gold"><div class="kpi-number">1</div><div class="kpi-label">Seul interlocuteur</div></div>
-      <div class="kpi-card gold"><div class="kpi-number">7j/7</div><div class="kpi-label">Disponibilité</div></div>
-      <div class="kpi-card"><div class="kpi-number">24h</div><div class="kpi-label">Délai de réponse</div></div>
+      <div class="kpi-card">
+        <div class="kpi-number">100%</div>
+        <div class="kpi-label">Prise en charge</div>
+      </div>
+      <div class="kpi-card gold">
+        <div class="kpi-number">20%</div>
+        <div class="kpi-label">Tarif TTC</div>
+      </div>
+      <div class="kpi-card gold">
+        <div class="kpi-number">7j/7</div>
+        <div class="kpi-label">Disponibilité</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-number">24h</div>
+        <div class="kpi-label">Délai de réponse</div>
+      </div>
     </div>
     <div class="inner-illus-band" style="height: 36mm;">
       <svg viewBox="0 0 760 140" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-        <defs><linearGradient id="skyP3" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#EDE6D0"/><stop offset="100%" stop-color="#E5D7B8"/></linearGradient></defs>
+        <defs>
+          <linearGradient id="skyP3" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#EDE6D0"/><stop offset="100%" stop-color="#E5D7B8"/>
+          </linearGradient>
+        </defs>
         <rect width="760" height="140" fill="url(#skyP3)"/>
         <path d="M0,70 Q190,40 380,68 Q570,95 760,58 L760,140 L0,140 Z" fill="#9BA678" opacity="0.5"/>
         <path d="M0,95 Q190,68 380,92 Q570,115 760,85 L760,140 L0,140 Z" fill="#7A8C4E" opacity="0.7"/>
@@ -705,7 +933,7 @@
         </g>
         <g transform="translate(400,78)">
           <rect x="0" y="0" width="40" height="26" fill="#EFE3C8" stroke="#C4A878" stroke-width="0.6"/>
-          <polygon points="-5,0 20,-14 45,0" fill="#B5703F"/>
+          <polygon points="-5,0 20,-14 45,0" fill="#C27A42"/>
           <rect x="14" y="12" width="10" height="14" fill="#7A5A34"/>
         </g>
       </svg>
@@ -735,31 +963,66 @@
   </div>
 </div>
 
-<!-- PAGE 4 — SERVICES -->
+<!-- ═══════════════════════════════════════════════
+     PAGE 4 — SERVICES
+═══════════════════════════════════════════════ -->
 <div class="page">
   <div class="side-ornament left"><div class="side-ornament-line"></div><span class="side-ornament-star">&#10022;</span><div class="side-ornament-line"></div></div>
   <div class="side-ornament right"><div class="side-ornament-line"></div><span class="side-ornament-star">&#10022;</span><div class="side-ornament-line"></div></div>
   <div class="inner">
-    <div class="inner-header"><div class="inner-header-logo">EMPAUMA</div><div class="inner-header-section">Nos prestations</div></div>
+    <div class="inner-header">
+      <div class="inner-header-logo">EMPAUMA</div>
+      <div class="inner-header-section">Nos prestations</div>
+    </div>
     <div class="section-eyebrow">Gestion clés en main</div>
     <h1 class="section-title">Tout ce que nous<br><em>faisons pour vous.</em></h1>
     <div class="section-sep"></div>
     <p class="section-intro">Un service complet qui couvre chaque étape de la vie locative de votre bien. Vous profitez de vos revenus, nous nous occupons du reste.</p>
     <div class="services-list">
-      <div class="service-row"><div class="service-number">01</div><div><div class="service-title">Création &amp; gestion des annonces</div><div class="service-desc">Photos professionnelles, description optimisée et publication sur les principales plateformes : Airbnb, Booking, Abritel.</div></div></div>
-      <div class="service-row"><div class="service-number">02</div><div><div class="service-title">Communication voyageurs</div><div class="service-desc">Gestion complète des échanges : réponses, messages programmés et personnalisés à chaque étape du séjour.</div></div></div>
-      <div class="service-row"><div class="service-number">03</div><div><div class="service-title">Ménage &amp; blanchisserie</div><div class="service-desc">Nettoyage complet entre chaque séjour par une équipe professionnelle. Linge et consommables compris.</div></div></div>
-      <div class="service-row"><div class="service-number">04</div><div><div class="service-title">Arrivées &amp; départs automatisés</div><div class="service-desc">Boîte à clés, interphone ou serrure connectée. Accueil physique disponible sur demande.</div></div></div>
-      <div class="service-row"><div class="service-number">05</div><div><div class="service-title">Optimisation de la rentabilité</div><div class="service-desc">Tarification dynamique ajustée selon la saisonnalité pour maximiser vos revenus toute l'année.</div></div></div>
-      <div class="service-row"><div class="service-number">06</div><div><div class="service-title">Maintenance &amp; conformité</div><div class="service-desc">Suivi technique, coordination des artisans et accompagnement sur les obligations légales.</div></div></div>
-      <div class="service-row"><div class="service-number">07</div><div><span class="options-badge">Option</span><div class="service-title">Décoration &amp; attentions sur mesure</div><div class="service-desc">Aménagement par architectes d'intérieur, paniers gourmands, fleurs, transferts — pour des séjours d'exception.</div></div></div>
+      <div class="service-row">
+        <div class="service-number">01</div>
+        <div><div class="service-title">Création &amp; gestion des annonces</div><div class="service-desc">Photos professionnelles, description optimisée et publication sur les principales plateformes : Airbnb, Booking, Abritel.</div></div>
+      </div>
+      <div class="service-row">
+        <div class="service-number">02</div>
+        <div><div class="service-title">Communication voyageurs</div><div class="service-desc">Gestion complète des échanges : réponses, messages programmés et personnalisés à chaque étape du séjour.</div></div>
+      </div>
+      <div class="service-row">
+        <div class="service-number">03</div>
+        <div><div class="service-title">Ménage &amp; blanchisserie</div><div class="service-desc">Nettoyage complet entre chaque séjour par une équipe professionnelle. Linge et consommables compris.</div></div>
+      </div>
+      <div class="service-row">
+        <div class="service-number">04</div>
+        <div><div class="service-title">Arrivées &amp; départs automatisés</div><div class="service-desc">Boîte à clés, interphone ou serrure connectée. Accueil physique disponible sur demande.</div></div>
+      </div>
+      <div class="service-row">
+        <div class="service-number">05</div>
+        <div><div class="service-title">Optimisation de la rentabilité</div><div class="service-desc">Tarification dynamique ajustée selon la saisonnalité pour maximiser vos revenus toute l'année.</div></div>
+      </div>
+      <div class="service-row">
+        <div class="service-number">06</div>
+        <div><div class="service-title">Maintenance &amp; conformité</div><div class="service-desc">Suivi technique, coordination des artisans et accompagnement sur les obligations légales.</div></div>
+      </div>
+      <div class="service-row">
+        <div class="service-number">07</div>
+        <div>
+          <span class="options-badge">Option</span>
+          <div class="service-title">Décoration &amp; attentions sur mesure</div>
+          <div class="service-desc">Aménagement par architectes d'intérieur, paniers gourmands, fleurs, transferts — pour des séjours d'exception.</div>
+        </div>
+      </div>
     </div>
     <div class="inner-illus-band" style="height: 28mm; margin-top: 18px; margin-bottom: 0;">
       <svg viewBox="0 0 760 110" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-        <rect width="760" height="110" fill="#EDE6D0"/>
+        <defs>
+          <linearGradient id="bandBg4" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#EDE6D0"/><stop offset="100%" stop-color="#E2D5B5"/>
+          </linearGradient>
+        </defs>
+        <rect width="760" height="110" fill="url(#bandBg4)"/>
         <path d="M0,95 Q380,75 760,95 L760,110 L0,110 Z" fill="#7A8C4E" opacity="0.4"/>
-        <g fill="#8B7BA8">
-          <g opacity="0.55">
+        <g fill="#9B8CC0">
+          <g opacity="0.5">
             <ellipse cx="60" cy="58" rx="3" ry="11"/><ellipse cx="110" cy="60" rx="3" ry="11"/><ellipse cx="160" cy="57" rx="3" ry="11"/>
             <ellipse cx="210" cy="61" rx="3" ry="11"/><ellipse cx="260" cy="58" rx="3" ry="11"/><ellipse cx="310" cy="60" rx="3" ry="11"/>
             <ellipse cx="360" cy="57" rx="3" ry="11"/><ellipse cx="410" cy="61" rx="3" ry="11"/><ellipse cx="460" cy="58" rx="3" ry="11"/>
@@ -780,47 +1043,75 @@
   </div>
 </div>
 
-<!-- PAGE 5 — TÉMOIGNAGE + PROCESSUS -->
+<!-- ═══════════════════════════════════════════════
+     PAGE 5 — TÉMOIGNAGE + PROCESSUS
+═══════════════════════════════════════════════ -->
 <div class="page">
   <div class="side-ornament left"><div class="side-ornament-line"></div><span class="side-ornament-star">&#10022;</span><div class="side-ornament-line"></div></div>
   <div class="side-ornament right"><div class="side-ornament-line"></div><span class="side-ornament-star">&#10022;</span><div class="side-ornament-line"></div></div>
   <div class="inner">
-    <div class="inner-header"><div class="inner-header-logo">EMPAUMA</div><div class="inner-header-section">Témoignage &amp; processus</div></div>
+    <div class="inner-header">
+      <div class="inner-header-logo">EMPAUMA</div>
+      <div class="inner-header-section">Témoignage &amp; processus</div>
+    </div>
     <div class="section-eyebrow">Ils nous font confiance</div>
     <h1 class="section-title">Ce qu'ils en<br><em>disent.</em></h1>
     <div class="section-sep"></div>
     <div class="testimonial-block">
       <div class="testimonial-quote-mark">"</div>
-      <div class="testimonial-text">Confier notre bastide à Empauma a été la meilleure décision. Nous avons retrouvé notre tranquillité d'esprit et nos revenus locatifs ont nettement progressé. L'équipe est attentive, réactive et nos voyageurs nous écrivent toujours pour nous féliciter de l'accueil. Un vrai partenaire de confiance.</div>
+      <div class="testimonial-stars">
+        <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+      </div>
+      <div class="testimonial-text">J'avais hésité longtemps avant de me lancer dans la location saisonnière. Depuis que j'ai confié ma maison à Empauma, tout se passe sans effort. Elle est actuellement en location et tout se passe très bien. Ce qui m'a rassurée, c'est d'être tenue informée à chaque étape, sans avoir à relancer personne. Je ne regrette absolument pas mon choix.</div>
       <div class="testimonial-author">
-        <div class="testimonial-author-avatar">M</div>
-        <div><div class="testimonial-author-name">Marie &amp; Antoine D.</div><div class="testimonial-author-detail">Propriétaires à Sanary-sur-Mer · 2 logements</div></div>
+        <div class="testimonial-author-avatar">G</div>
+        <div>
+          <div class="testimonial-author-name">Ghislaine</div>
+          <div class="testimonial-author-detail">Propriétaire à Pierrefeu-du-Var</div>
+        </div>
       </div>
     </div>
-    <div class="section-eyebrow" style="margin-top: 4px;">Démarrer avec nous</div>
-    <h2 style="font-size: 22px; font-weight: 300; color: #3A3018; margin-bottom: 6px;">Simple, rapide, et <em style="color: #7A8C4E; font-style: italic;">sans effort.</em></h2>
+    <div class="section-eyebrow" style="margin-top: 6px;">Démarrer avec nous</div>
+    <h2 style="font-size: 26px; font-weight: 300; color: #3A3018; margin-bottom: 6px;">Simple, rapide, et <em style="color: #7A8C4E; font-style: italic;">sans effort.</em></h2>
     <div class="section-sep"></div>
     <div class="process-list">
       <div class="process-step">
         <div class="process-step-nb-wrap"><div class="process-step-nb">1</div><div class="process-step-line"></div></div>
-        <div class="process-step-content"><div class="process-step-title">Prise de contact &amp; visite</div><div class="process-step-desc">Nous échangeons sur votre bien. Une visite est organisée pour un diagnostic complet et personnalisé.</div></div>
+        <div class="process-step-content">
+          <div class="process-step-title">Prise de contact &amp; visite</div>
+          <div class="process-step-desc">Nous échangeons sur votre bien. Une visite est organisée pour un diagnostic complet et personnalisé.</div>
+        </div>
       </div>
       <div class="process-step">
         <div class="process-step-nb-wrap"><div class="process-step-nb">2</div><div class="process-step-line"></div></div>
-        <div class="process-step-content"><div class="process-step-title">Mise en place &amp; lancement</div><div class="process-step-desc">Création des annonces, installation des accès connectés, lancement de la commercialisation.</div></div>
+        <div class="process-step-content">
+          <div class="process-step-title">Mise en place &amp; lancement</div>
+          <div class="process-step-desc">Création des annonces, installation des accès connectés, lancement de la commercialisation.</div>
+        </div>
       </div>
       <div class="process-step">
         <div class="process-step-nb-wrap"><div class="process-step-nb">3</div><div class="process-step-line"></div></div>
-        <div class="process-step-content"><div class="process-step-title">Gestion au quotidien</div><div class="process-step-desc">Réservations, voyageurs, ménage, maintenance : tout est pris en charge. Vous n'avez plus rien à faire.</div></div>
+        <div class="process-step-content">
+          <div class="process-step-title">Gestion au quotidien</div>
+          <div class="process-step-desc">Réservations, voyageurs, ménage, maintenance : tout est pris en charge. Vous n'avez plus rien à faire.</div>
+        </div>
       </div>
       <div class="process-step">
         <div class="process-step-nb-wrap"><div class="process-step-nb">4</div></div>
-        <div class="process-step-content"><div class="process-step-title">Bilan &amp; optimisation</div><div class="process-step-desc">Rapport mensuel détaillé, ajustement continu des tarifs pour booster vos revenus en continu.</div></div>
+        <div class="process-step-content">
+          <div class="process-step-title">Bilan &amp; optimisation</div>
+          <div class="process-step-desc">Rapport mensuel détaillé, ajustement continu des tarifs pour booster vos revenus en continu.</div>
+        </div>
       </div>
     </div>
     <div class="inner-illus-band" style="height: 32mm; margin-top: 18px; margin-bottom: 0;">
       <svg viewBox="0 0 760 130" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-        <rect width="760" height="130" fill="#EDE6D0"/>
+        <defs>
+          <linearGradient id="bandBg5" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#EDE6D0"/><stop offset="100%" stop-color="#E5D7B8"/>
+          </linearGradient>
+        </defs>
+        <rect width="760" height="130" fill="url(#bandBg5)"/>
         <rect x="0" y="20" width="760" height="110" fill="#E5D7B8"/>
         <g stroke="#C4A878" stroke-width="0.5" opacity="0.5">
           <line x1="0" y1="48" x2="760" y2="48"/><line x1="0" y1="76" x2="760" y2="76"/>
@@ -843,20 +1134,37 @@
   </div>
 </div>
 
-<!-- PAGE 6 — FAQ + CONTACT + QR -->
+<!-- ═══════════════════════════════════════════════
+     PAGE 6 — FAQ + CONTACT + QR
+═══════════════════════════════════════════════ -->
 <div class="page">
   <div class="side-ornament left"><div class="side-ornament-line"></div><span class="side-ornament-star">&#10022;</span><div class="side-ornament-line"></div></div>
   <div class="side-ornament right"><div class="side-ornament-line"></div><span class="side-ornament-star">&#10022;</span><div class="side-ornament-line"></div></div>
   <div class="inner">
-    <div class="inner-header"><div class="inner-header-logo">EMPAUMA</div><div class="inner-header-section">Questions &amp; contact</div></div>
+    <div class="inner-header">
+      <div class="inner-header-logo">EMPAUMA</div>
+      <div class="inner-header-section">Questions &amp; contact</div>
+    </div>
     <div class="section-eyebrow">Vos questions, nos réponses</div>
     <h1 class="section-title">Tout ce qu'il faut<br><em>savoir.</em></h1>
     <div class="section-sep"></div>
     <div class="faq-list">
-      <div class="faq-item"><div class="faq-question">Et si mon bien est déjà loué ?</div><div class="faq-answer">Aucun problème. Nous reprenons la gestion à votre rythme et coordonnons la transition en douceur avec vos prochains voyageurs.</div></div>
-      <div class="faq-item"><div class="faq-question">Combien de temps pour démarrer ?</div><div class="faq-answer">En général, 7 à 14 jours entre la visite initiale et la mise en ligne de votre bien : le temps de réaliser les photos, optimiser l'annonce et installer les accès.</div></div>
-      <div class="faq-item"><div class="faq-question">Suis-je engagé sur la durée ?</div><div class="faq-answer">Notre relation est basée sur la confiance et la satisfaction. Vous restez libre de vos décisions à tout moment, sans clauses contraignantes.</div></div>
-      <div class="faq-item"><div class="faq-question">Comment sont versés mes revenus ?</div><div class="faq-answer">Vos revenus locatifs vous sont reversés chaque mois, accompagnés d'un rapport détaillé de l'activité de votre bien.</div></div>
+      <div class="faq-item">
+        <div class="faq-question">Et si mon bien est déjà loué ?</div>
+        <div class="faq-answer">Aucun problème. Nous reprenons la gestion à votre rythme et coordonnons la transition en douceur avec vos prochains voyageurs.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">Combien de temps pour démarrer ?</div>
+        <div class="faq-answer">En général, 7 à 14 jours entre la visite initiale et la mise en ligne de votre bien : le temps de réaliser les photos, optimiser l'annonce et installer les accès.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">Suis-je engagé sur la durée ?</div>
+        <div class="faq-answer">Notre relation est basée sur la confiance et la satisfaction. Vous restez libre de vos décisions à tout moment, sans clauses contraignantes.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">Comment sont versés mes revenus ?</div>
+        <div class="faq-answer">Vos revenus locatifs vous sont reversés chaque mois, accompagnés d'un rapport détaillé de l'activité de votre bien.</div>
+      </div>
     </div>
     <div class="contact-final">
       <div class="contact-final-content">
@@ -864,12 +1172,25 @@
         <div class="contact-final-title">Discutons de votre projet.</div>
         <div class="contact-final-sub">Premier échange et visite sans engagement.</div>
         <div class="contact-final-info">
-          <div class="contact-final-line"><span class="contact-final-line-label">Tél.</span><span class="contact-final-line-val">06 66 73 85 07</span></div>
-          <div class="contact-final-line"><span class="contact-final-line-label">Email</span><span class="contact-final-line-val gold">contact@empauma-conciergerie.fr</span></div>
-          <div class="contact-final-line"><span class="contact-final-line-label">Web</span><span class="contact-final-line-val">empauma-conciergerie.fr</span></div>
-          <div class="contact-final-line"><span class="contact-final-line-label">Insta</span><span class="contact-final-line-val gold">@Empaumaconciergerie</span></div>
+          <div class="contact-final-line">
+            <span class="contact-final-line-label">Tél.</span>
+            <span class="contact-final-line-val">06 66 73 85 07</span>
+          </div>
+          <div class="contact-final-line">
+            <span class="contact-final-line-label">Email</span>
+            <span class="contact-final-line-val gold">contact@empauma-conciergerie.fr</span>
+          </div>
+          <div class="contact-final-line">
+            <span class="contact-final-line-label">Web</span>
+            <span class="contact-final-line-val">empauma-conciergerie.fr</span>
+          </div>
+          <div class="contact-final-line">
+            <span class="contact-final-line-label">Insta</span>
+            <span class="contact-final-line-val gold">@Empaumaconciergerie</span>
+          </div>
         </div>
       </div>
+      <!-- QR CODE — À REMPLACER PAR LE SVG FOURNI -->
       <div class="qr-block">
         <svg class="qr-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
           <rect width="200" height="200" fill="#F4EDD8"/>
