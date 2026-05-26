@@ -13,7 +13,7 @@ async function generateFlyer() {
 
   // ─── CSS ─────────────────────────────────────────────────────────────────────
   const css = `
-  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600&family=Jost:wght@400;500;600;700&display=swap');
 
   :root {
     --olive:   #3D4F25;
@@ -25,9 +25,9 @@ async function generateFlyer() {
     --cream3:  #FBF8EF;
     --ocre:    #C49A58;
     --ocre2:   #D9B47D;
-    --ink:     #2E2A1E;
-    --ink2:    #3A3018;
-    --ink3:    #5C4A2A;
+    --ink:     #1A1A14;
+    --ink2:    #111111;   /* was #3A3018 brown → black */
+    --ink3:    #1A1A1A;   /* was #5C4A2A brown → near-black */
     --serif: 'Cormorant Garamond', Georgia, serif;
     --sans:  'Jost', Arial, sans-serif;
   }
@@ -54,6 +54,29 @@ async function generateFlyer() {
     position: relative;
   }
 
+  /* ── SURLIGNAGES ── */
+  .hl-gold {
+    background: #FFE566;
+    padding: 1px 4px;
+    border-radius: 3px;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+  }
+  .hl-sage {
+    background: #BFDB6A;
+    padding: 1px 4px;
+    border-radius: 3px;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+  }
+  .hl-ocre {
+    background: #F5D080;
+    padding: 1px 4px;
+    border-radius: 3px;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+  }
+
   /* ══════════════ EN-TÊTE COMMUN ══════════════ */
   .hd {
     background: var(--olive);
@@ -70,7 +93,6 @@ async function generateFlyer() {
     background: var(--cream);
     clip-path: ellipse(55% 100% at 50% 100%);
   }
-  /* En-tête verso : plus compact */
   .hd-sm { padding: 22px 38px 20px; }
   .hd-sm::after { height: 18px; }
 
@@ -82,19 +104,19 @@ async function generateFlyer() {
   .logo-name {
     font-family: var(--serif);
     font-size: 52px;
-    font-weight: 300;
+    font-weight: 400;        /* was 300 */
     letter-spacing: 12px;
     color: var(--cream);
     line-height: 1;
   }
   .logo-rule   { width:170px; height:0.7px; background:var(--sage); margin:12px auto; opacity:0.6; }
-  .logo-sub    { font-family:var(--sans); font-size:12px; letter-spacing:6px; color:var(--sage); font-weight:300; }
-  .logo-slogan { font-family:var(--serif); font-style:italic; font-size:15px; color:var(--ocre); margin-top:9px; letter-spacing:0.4px; }
+  .logo-sub    { font-family:var(--sans); font-size:12px; letter-spacing:6px; color:var(--sage); font-weight:600; } /* was 300 */
+  .logo-slogan { font-family:var(--serif); font-style:italic; font-size:15px; font-weight:500; color:var(--ocre); margin-top:9px; letter-spacing:0.4px; } /* was no weight */
 
   /* VERSO titre */
-  .verso-eyebrow { font-family:var(--sans); font-size:10px; letter-spacing:4.5px; text-transform:uppercase; color:var(--sage); margin-bottom:6px; margin-top:3px; }
-  .verso-sub     { font-family:var(--serif); font-size:24px; font-weight:300; color:var(--cream); letter-spacing:1px; }
-  .verso-sub em  { color:var(--ocre); }
+  .verso-eyebrow { font-family:var(--sans); font-size:10px; letter-spacing:4.5px; text-transform:uppercase; color:var(--sage); font-weight:600; margin-bottom:6px; margin-top:3px; }
+  .verso-sub     { font-family:var(--serif); font-size:24px; font-weight:500; color:var(--cream); letter-spacing:1px; } /* was 300 */
+  .verso-sub em  { color:var(--ocre); font-weight:600; }
 
   /* ══════════════ RECTO ══════════════ */
 
@@ -107,20 +129,20 @@ async function generateFlyer() {
   .accroche-title {
     font-family: var(--serif);
     font-size: 30px;
-    font-weight: 400;
+    font-weight: 600;        /* was 400 */
     color: var(--ink2);
     line-height: 1.15;
     white-space: nowrap;
   }
-  .accroche-title em { color:var(--sage); font-style:italic; }
+  .accroche-title em { color:var(--sage); font-style:italic; font-weight:600; }
   .accroche-rule { width:52px; height:0.8px; background:var(--ocre); margin:11px auto; }
   .accroche-text {
     font-family: var(--serif);
     font-size: 15px;
-    color: var(--ink3);
+    font-weight: 500;        /* was 300/italic light */
+    color: var(--ink3);      /* was ink3 brown → now near-black */
     line-height: 1.7;
     font-style: italic;
-    opacity: 0.9;
   }
 
   /* Stats — 2 cellules */
@@ -135,8 +157,8 @@ async function generateFlyer() {
   }
   .stat-cell { flex:1; background:var(--cream); padding:14px 10px; text-align:center; }
   .stat-sep  { width:1px; background:rgba(122,140,78,0.35); }
-  .stat-nb   { font-family:var(--serif); font-size:30px; font-weight:300; color:var(--olive); line-height:1; margin-bottom:5px; }
-  .stat-lb   { font-family:var(--sans); font-size:11px; letter-spacing:1.5px; text-transform:uppercase; color:#8C7A5E; line-height:1.4; }
+  .stat-nb   { font-family:var(--serif); font-size:30px; font-weight:500; color:var(--olive); line-height:1; margin-bottom:5px; } /* was 300 */
+  .stat-lb   { font-family:var(--sans); font-size:11px; letter-spacing:1.5px; text-transform:uppercase; color:#2A2A2A; font-weight:600; line-height:1.4; } /* was #8C7A5E brown + no weight */
 
   /* Tarif 20 % TTC */
   .tarif-block {
@@ -151,7 +173,7 @@ async function generateFlyer() {
     text-align: center;
     font-family: var(--sans);
     font-size: 10px;
-    font-weight: 600;
+    font-weight: 700;        /* was 600 */
     letter-spacing: 2.5px;
     text-transform: uppercase;
     color: var(--ink);
@@ -166,15 +188,16 @@ async function generateFlyer() {
   .tarif-label {
     font-family: var(--sans);
     font-size: 10px;
+    font-weight: 600;        /* was nothing */
     letter-spacing: 2.5px;
     text-transform: uppercase;
     color: var(--sage-pl);
     margin-bottom: 5px;
   }
   .tarif-price { line-height:1; margin-bottom:6px; }
-  .tarif-pct   { font-family:var(--serif); font-size:62px; font-weight:300; color:var(--cream); }
-  .tarif-ttc   { font-family:var(--sans); font-size:17px; font-weight:600; color:var(--ocre); vertical-align:middle; letter-spacing:1px; }
-  .tarif-desc  { font-family:var(--sans); font-size:11px; color:var(--sage-pl); line-height:1.55; font-weight:300; }
+  .tarif-pct   { font-family:var(--serif); font-size:62px; font-weight:500; color:var(--cream); } /* was 300 */
+  .tarif-ttc   { font-family:var(--sans); font-size:17px; font-weight:700; color:var(--ocre); vertical-align:middle; letter-spacing:1px; }
+  .tarif-desc  { font-family:var(--sans); font-size:11px; color:var(--sage-pl); line-height:1.55; font-weight:500; } /* was 300 */
 
   .tarif-divider { width:1px; background:rgba(244,237,216,0.18); align-self:stretch; margin:0 18px; flex-shrink:0; }
 
@@ -182,11 +205,11 @@ async function generateFlyer() {
   .tarif-item  {
     font-family: var(--sans);
     font-size: 12px;
+    font-weight: 600;        /* was 300 */
     color: var(--cream);
     display: flex;
     align-items: center;
     gap: 8px;
-    font-weight: 300;
     line-height: 1.3;
   }
   .chk { color:var(--ocre); font-size:14px; flex-shrink:0; line-height:1; }
@@ -203,14 +226,14 @@ async function generateFlyer() {
     flex-shrink: 0;
   }
   .contact-info { flex:1; }
-  .contact-eyebrow { font-family:var(--sans); font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--sage); margin-bottom:7px; }
-  .contact-tel   { font-family:var(--serif); font-size:22px; font-weight:400; color:var(--cream); letter-spacing:1px; margin-bottom:4px; }
-  .contact-email { font-family:var(--sans); font-size:12px; color:var(--ocre); letter-spacing:0.2px; margin-bottom:3px; }
-  .contact-web   { font-family:var(--sans); font-size:11px; color:var(--cream); opacity:0.6; }
+  .contact-eyebrow { font-family:var(--sans); font-size:10px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--sage); margin-bottom:7px; }
+  .contact-tel   { font-family:var(--serif); font-size:22px; font-weight:600; color:var(--cream); letter-spacing:1px; margin-bottom:4px; } /* was 400 */
+  .contact-email { font-family:var(--sans); font-size:12px; font-weight:500; color:var(--ocre); letter-spacing:0.2px; margin-bottom:3px; } /* was no weight */
+  .contact-web   { font-family:var(--sans); font-size:11px; font-weight:500; color:#9A9A88; } /* was opacity:0.6 on cream → now grey */
   .contact-sep   { width:1px; height:70px; background:rgba(122,140,78,0.35); flex-shrink:0; }
   .qr-wrap       { display:flex; flex-direction:column; align-items:center; gap:6px; }
   .qr-img        { width:74px; height:74px; border-radius:5px; border:1.5px solid rgba(196,154,88,0.4); display:block; }
-  .qr-caption    { font-family:var(--sans); font-size:10px; color:rgba(244,237,216,0.55); text-align:center; line-height:1.4; letter-spacing:0.5px; }
+  .qr-caption    { font-family:var(--sans); font-size:10px; font-weight:500; color:#8A8A78; text-align:center; line-height:1.4; letter-spacing:0.5px; }
 
   /* ══════════════ VERSO ══════════════ */
   .verso { background: var(--cream); }
@@ -219,6 +242,7 @@ async function generateFlyer() {
   .section-label {
     font-family: var(--sans);
     font-size: 10px;
+    font-weight: 700;        /* was no weight */
     letter-spacing: 4px;
     text-transform: uppercase;
     color: var(--sage);
@@ -246,8 +270,8 @@ async function generateFlyer() {
     flex-shrink: 0; margin-top: 1px;
   }
   .svc-icon svg { width:13px; height:13px; }
-  .svc-title { font-family:var(--sans); font-size:11px; font-weight:500; letter-spacing:0.5px; color:var(--olive); text-transform:uppercase; margin-bottom:3px; line-height:1.2; }
-  .svc-desc  { font-family:var(--serif); font-size:13px; color:var(--ink3); line-height:1.45; }
+  .svc-title { font-family:var(--sans); font-size:11px; font-weight:700; letter-spacing:0.5px; color:var(--olive); text-transform:uppercase; margin-bottom:3px; line-height:1.2; } /* was 500 */
+  .svc-desc  { font-family:var(--serif); font-size:13px; font-weight:500; color:var(--ink3); line-height:1.45; } /* was no weight, was brown */
 
   /* Étapes */
   .etapes { display:flex; flex-direction:column; }
@@ -260,13 +284,14 @@ async function generateFlyer() {
     color: var(--cream);
     font-family: var(--serif);
     font-size: 16px;
+    font-weight: 600;        /* was no weight */
     display: flex; align-items:center; justify-content:center;
     flex-shrink: 0;
   }
   .etape-line { width:1px; background:var(--sage); opacity:0.3; flex:1; min-height:12px; margin-top:4px; }
   .etape-body { padding: 3px 0 12px; }
-  .etape-title { font-family:var(--sans); font-size:11px; font-weight:500; letter-spacing:0.8px; text-transform:uppercase; color:var(--olive); margin-bottom:3px; }
-  .etape-desc  { font-family:var(--serif); font-size:13px; color:var(--ink3); line-height:1.55; font-style:italic; opacity:0.9; }
+  .etape-title { font-family:var(--sans); font-size:11px; font-weight:700; letter-spacing:0.8px; text-transform:uppercase; color:var(--olive); margin-bottom:3px; } /* was 500 */
+  .etape-desc  { font-family:var(--serif); font-size:13px; font-weight:500; color:var(--ink3); line-height:1.55; font-style:italic; } /* was 300/opacity, was brown */
 
   /* Footer verso */
   .verso-foot {
@@ -278,12 +303,12 @@ async function generateFlyer() {
     justify-content: space-between;
     flex-shrink: 0;
   }
-  .vf-logo      { font-family:var(--serif); font-size:20px; font-weight:300; letter-spacing:5px; color:var(--cream); }
-  .vf-logo span { font-family:var(--sans); font-size:11px; letter-spacing:3.5px; color:var(--sage); font-weight:300; display:block; margin-top:2px; }
+  .vf-logo      { font-family:var(--serif); font-size:20px; font-weight:500; letter-spacing:5px; color:var(--cream); } /* was 300 */
+  .vf-logo span { font-family:var(--sans); font-size:11px; letter-spacing:3.5px; color:var(--sage); font-weight:600; display:block; margin-top:2px; } /* was 300 */
   .vf-sep       { width:1px; height:32px; background:var(--sage); opacity:0.35; }
   .vf-right     { text-align:right; }
-  .vf-tel       { font-family:var(--serif); font-size:17px; color:var(--cream); letter-spacing:0.5px; margin-bottom:3px; }
-  .vf-web       { font-family:var(--sans); font-size:12px; color:var(--ocre); letter-spacing:0.3px; }
+  .vf-tel       { font-family:var(--serif); font-size:17px; font-weight:500; color:var(--cream); letter-spacing:0.5px; margin-bottom:3px; } /* was no weight */
+  .vf-web       { font-family:var(--sans); font-size:12px; font-weight:600; color:var(--ocre); letter-spacing:0.3px; } /* was no weight */
 
   @media print {
     body { background: white; }
@@ -307,11 +332,11 @@ async function generateFlyer() {
     </div>
 
     <div class="accroche">
-      <div class="accroche-title">Vous louez, <em>nous gérons tout.</em></div>
+      <div class="accroche-title">Vous louez, <em><span class="hl-gold">nous gérons tout.</span></em></div>
       <div class="accroche-rule"></div>
       <div class="accroche-text">
-        Confiez votre bien à Empauma et profitez de vos revenus sans contrainte.<br>
-        Un seul interlocuteur, zéro frais caché, 100&nbsp;% prise en charge.
+        Confiez votre bien à Empauma et profitez de vos revenus <span class="hl-sage">sans contrainte</span>.<br>
+        Un seul interlocuteur, <span class="hl-gold">zéro frais caché</span>, 100&nbsp;% prise en charge.
       </div>
     </div>
 
@@ -384,7 +409,7 @@ async function generateFlyer() {
           </div>
           <div class="svc-body">
             <div class="svc-title">Photos & annonces</div>
-            <div class="svc-desc">Clichés pro, textes optimisés, multi-plateformes</div>
+            <div class="svc-desc">Clichés pro, textes optimisés, <span class="hl-sage">multi-plateformes</span></div>
           </div>
         </div>
 
@@ -396,7 +421,7 @@ async function generateFlyer() {
           </div>
           <div class="svc-body">
             <div class="svc-title">Prix dynamiques</div>
-            <div class="svc-desc">Tarifs ajustés en temps réel pour maximiser vos revenus</div>
+            <div class="svc-desc">Tarifs ajustés pour <span class="hl-gold">maximiser vos revenus</span></div>
           </div>
         </div>
 
@@ -434,7 +459,7 @@ async function generateFlyer() {
           </div>
           <div class="svc-body">
             <div class="svc-title">Ménage & linge</div>
-            <div class="svc-desc">Logement impeccable entre chaque séjour</div>
+            <div class="svc-desc"><span class="hl-sage">Logement impeccable</span> entre chaque séjour</div>
           </div>
         </div>
 
@@ -467,7 +492,7 @@ async function generateFlyer() {
           </div>
           <div class="etape-body">
             <div class="etape-title">Prise de contact & visite</div>
-            <div class="etape-desc">Nous échangeons sur votre bien et vos attentes. Une visite est organisée pour un diagnostic complet.</div>
+            <div class="etape-desc">Nous échangeons sur votre bien et vos attentes. Une visite est organisée pour un <span class="hl-sage">diagnostic complet</span>.</div>
           </div>
         </div>
 
@@ -478,7 +503,7 @@ async function generateFlyer() {
           </div>
           <div class="etape-body">
             <div class="etape-title">Mise en place & lancement</div>
-            <div class="etape-desc">Annonces créées, accès connectés installés, commercialisation lancée.</div>
+            <div class="etape-desc">Annonces créées, accès connectés installés, <span class="hl-ocre">commercialisation lancée</span>.</div>
           </div>
         </div>
 
@@ -489,7 +514,7 @@ async function generateFlyer() {
           </div>
           <div class="etape-body">
             <div class="etape-title">Gestion au quotidien</div>
-            <div class="etape-desc">Réservations, voyageurs, ménage, maintenance — tout est géré. Vous n'avez rien à faire.</div>
+            <div class="etape-desc">Réservations, ménage, maintenance — tout est géré. <span class="hl-gold">Vous n'avez rien à faire.</span></div>
           </div>
         </div>
 
@@ -499,7 +524,7 @@ async function generateFlyer() {
           </div>
           <div class="etape-body">
             <div class="etape-title">Bilan mensuel & optimisation</div>
-            <div class="etape-desc">Rapport complet chaque mois, tarifs ajustés pour maximiser vos revenus en continu.</div>
+            <div class="etape-desc">Rapport complet chaque mois, tarifs ajustés pour <span class="hl-sage">maximiser vos revenus</span> en continu.</div>
           </div>
         </div>
 
