@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import ProfileAvatar from './ProfileAvatar'
 
 const starSvg = (
   <svg viewBox="0 0 24 24" fill="#C49A58" aria-hidden="true">
@@ -58,16 +58,12 @@ export default function Testimonials() {
               </div>
               <p className="testimonial-text">{t.text}</p>
               <div className="testimonial-author">
-                <div className="testimonial-avatar">
-                  <span className="avatar-initial">{t.name[0]}</span>
-                  <Image
-                    src={t.avatar}
-                    alt={`Photo de ${t.name}`}
-                    fill
-                    style={{ objectFit: 'cover', objectPosition: 'top' }}
-                    sizes="64px"
-                  />
-                </div>
+                <ProfileAvatar
+                  src={t.avatar}
+                  alt={`Photo de ${t.name}`}
+                  initial={t.name[0]}
+                  className="testimonial-avatar"
+                />
                 <div>
                   <div className="name">{t.name}</div>
                   <div className="detail">{t.detail}</div>

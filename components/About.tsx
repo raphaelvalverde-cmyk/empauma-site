@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import ProfileAvatar from './ProfileAvatar'
 
 export default function About() {
   return (
@@ -70,16 +70,13 @@ export default function About() {
             <div className="about-block-num">03 — Rencontre</div>
             <h3>Qui suis-je ?</h3>
             <div className="about-profile-photo-wrap">
-              <div className="about-profile-photo">
-                <span className="avatar-initial avatar-initial-lg">R</span>
-                <Image
-                  src="/images/profil-raphael.jpg"
-                  alt="Raphaël Valverde, fondateur d'Empauma"
-                  fill
-                  style={{ objectFit: 'cover', objectPosition: 'center top' }}
-                  sizes="140px"
-                />
-              </div>
+              <ProfileAvatar
+                src="/images/profil-raphael.jpg"
+                alt="Raphaël Valverde, fondateur d'Empauma"
+                initial="R"
+                className="about-profile-photo"
+                size="lg"
+              />
             </div>
             <p>
               Je m&apos;appelle Raphaël Valverde, fondateur d&apos;Empauma. J&apos;ai créé cette conciergerie parce que j&apos;ai moi-même
