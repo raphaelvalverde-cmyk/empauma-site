@@ -30,11 +30,19 @@ export default function Hero() {
         />
       </svg>
 
+      {/* Extra hero decorative elements */}
+      <span className="star-deco" style={{ top: '22%', left: '5%', fontSize: '20px', animationDelay: '-1.5s', color: 'var(--cream)', opacity: 0.18 }}>✦</span>
+      <span className="star-deco" style={{ bottom: '28%', right: '12%', fontSize: '16px', animationDelay: '-3s', color: 'var(--ocre-honey)', opacity: 0.25 }}>✿</span>
+      <span className="star-deco" style={{ top: '65%', left: '3%', fontSize: '14px', animationDelay: '-4.5s', color: 'var(--cream)', opacity: 0.15 }}>✤</span>
+      <span className="star-deco" style={{ top: '15%', right: '18%', fontSize: '18px', animationDelay: '-2.2s', color: 'var(--ocre-honey)', opacity: 0.2 }}>❋</span>
+
       <div className="hero-inner">
         <div className="hero-content">
           <div className="eyebrow reveal">Conciergerie premium · Var</div>
           <h1 className="reveal">
-            Vos locations saisonnières dans le Var,{' '}
+            Vos locations saisonnières dans le{' '}
+            <span style={{ whiteSpace: 'nowrap' }}>Var,</span>
+            <br />
             <em>gérées de A à Z.</em>
           </h1>
           <p className="hero-slogan reveal">Votre bien entre de bonnes mains.</p>
