@@ -91,6 +91,17 @@ const services = [
     title: 'Démarches administratives',
     desc: 'Prise en charge des démarches légales nécessaires à la location de votre bien : déclaration en mairie, numéro d\'enregistrement et conformité réglementaire.',
   },
+  {
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="#F4EDD8" strokeWidth="1.8">
+        <rect x="2" y="3" width="20" height="18" rx="2" />
+        <path d="M7 8h10M7 12h6M7 16h8" />
+        <path d="M16 16l2 2 3-3" />
+      </svg>
+    ),
+    title: 'Reporting & Facturation',
+    desc: 'Chaque mois, vous recevez une facture détaillée et transparente ainsi qu\'un rapport complet des performances de votre logement : taux d\'occupation, revenus générés et retour voyageurs.',
+  },
 ]
 
 export default function Services() {

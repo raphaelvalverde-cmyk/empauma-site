@@ -6,7 +6,7 @@ export default function Hero() {
       <div className="hero-bg">
         <Image
           src="/images/fond-mer.jpg"
-          alt="Vue sur mer en Provence-Alpes-Côte d'Azur"
+          alt="Vue sur mer dans le Var"
           fill
           style={{ objectFit: 'cover' }}
           priority
@@ -32,9 +32,9 @@ export default function Hero() {
 
       <div className="hero-inner">
         <div className="hero-content">
-          <div className="eyebrow reveal">Conciergerie premium · Provence-Alpes-Côte d&apos;Azur</div>
+          <div className="eyebrow reveal">Conciergerie premium · Var</div>
           <h1 className="reveal">
-            Vos locations saisonnières en PACA,{' '}
+            Vos locations saisonnières dans le Var,{' '}
             <em>gérées de A à Z.</em>
           </h1>
           <p className="hero-slogan reveal">Votre bien entre de bonnes mains.</p>
@@ -74,10 +74,6 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="hero-scroll" aria-hidden="true">
-        <div className="mouse" />
-        <span>Défiler</span>
-      </div>
     </header>
   )
 }
