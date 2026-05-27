@@ -1,12 +1,13 @@
 import { Resend } from 'resend'
 import { NextResponse } from 'next/server'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
-
 const FROM_ADDRESS = 'Empauma Conciergerie <contact@empauma-conciergerie.fr>'
 const TO_ADDRESS   = 'contact@empauma-conciergerie.fr'
 
 export async function POST(req: Request) {
+  // Instanciation au runtime (pas au niveau module) pour éviter
+  // l'erreur "Missing API key" lors du build Vercel sans env var
+  const resend = new Resend(process.env.RESEND_API_KEY)
   try {
     const body = await req.json()
     const { name, email, phone, type, dispo, message } = body
