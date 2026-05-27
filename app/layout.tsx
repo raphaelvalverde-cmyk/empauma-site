@@ -3,8 +3,8 @@ import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Empauma — Conciergerie de locations saisonnières à La Crau & en Provence',
-  description: 'Empauma, votre conciergerie premium pour locations saisonnières à La Crau et en Provence. Gestion complète clés en main : 20% TTC, zéro frais caché.',
+  title: 'Empauma — Conciergerie de locations saisonnières dans le Var',
+  description: 'Empauma, votre conciergerie premium pour locations saisonnières dans le Var. Gestion complète clés en main : 20% TTC, zéro frais caché.',
   metadataBase: new URL('https://www.empauma-conciergerie.fr'),
   icons: {
     icon: [{ url: '/icon.svg', type: 'image/svg+xml' }],
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Empauma — Conciergerie de locations saisonnières',
-    description: 'Gestion complète de vos locations saisonnières en Provence-Alpes-Côte d\'Azur. 20% TTC, zéro frais caché.',
+    description: 'Gestion complète de vos locations saisonnières dans le Var. 20% TTC, zéro frais caché.',
     locale: 'fr_FR',
     type: 'website',
   },

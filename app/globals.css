@@ -542,21 +542,15 @@ section { position: relative; overflow: hidden; }
   font-weight: 300;
 }
 .offer-card {
-  background: var(--white-warm);
+  background: var(--cream-pure);
   border-radius: 26px;
-  padding: 48px 42px;
-  box-shadow: 0 40px 80px rgba(46, 42, 30, 0.14);
-  border: 1px solid var(--border-soft);
+  padding: 60px 56px;
+  box-shadow: 0 12px 40px rgba(46, 42, 30, 0.10);
+  border: 2.5px solid var(--olive-deep);
   position: relative;
 }
 .offer-card::before {
-  content: '';
-  position: absolute;
-  top: -2px; left: -2px; right: -2px; bottom: -2px;
-  background: linear-gradient(135deg, var(--sage) 0%, var(--ocre-honey) 50%, var(--terracotta) 100%);
-  border-radius: 28px;
-  z-index: -1;
-  opacity: 0.9;
+  display: none;
 }
 .offer-card-ribbon {
   position: absolute;
@@ -584,19 +578,19 @@ section { position: relative; overflow: hidden; }
   letter-spacing: 2.5px;
   text-transform: uppercase;
   color: var(--sage);
-  font-weight: 500;
+  font-weight: 700;
 }
 .offer-card .price {
   font-family: var(--serif);
   font-size: 84px;
-  font-weight: 500;
+  font-weight: 700;
   color: var(--olive-deep);
   line-height: 1;
   margin: 14px 0 4px;
 }
-.offer-card .price span { font-size: 28px; color: var(--ocre-rust); }
-.offer-card .price-sub { font-size: 14px; color: var(--ink-soft); margin-bottom: 28px; }
-.offer-card .divider { height: 1px; background: var(--border-soft); margin: 26px 0; }
+.offer-card .price span { font-size: 28px; color: var(--ocre-rust); font-weight: 700; }
+.offer-card .price-sub { font-size: 14px; color: var(--ink); font-weight: 600; margin-bottom: 28px; }
+.offer-card .divider { height: 1px; background: var(--olive-deep); opacity: 0.2; margin: 26px 0; }
 .offer-list li {
   display: flex;
   align-items: flex-start;
@@ -604,7 +598,7 @@ section { position: relative; overflow: hidden; }
   padding: 9px 0;
   font-size: 14.5px;
   color: var(--ink);
-  font-weight: 300;
+  font-weight: 600;
 }
 .offer-list .check {
   width: 20px; height: 20px;
