@@ -112,6 +112,18 @@ export default function Services() {
       <div className="pattern-dots pattern-1" />
       <span className="star-deco" style={{ top: '14%', left: '6%', fontSize: '26px' }}>✦</span>
       <span className="star-deco" style={{ bottom: '18%', right: '8%', fontSize: '22px', animationDelay: '-2s' }}>✦</span>
+      <span className="star-deco" style={{ top: '38%', right: '3%', fontSize: '16px', animationDelay: '-1.2s' }}>✿</span>
+      <span className="star-deco" style={{ bottom: '42%', left: '3%', fontSize: '18px', animationDelay: '-3.8s' }}>✤</span>
+      <span className="star-deco" style={{ top: '70%', left: '8%', fontSize: '14px', animationDelay: '-5s' }}>✦</span>
+      <span className="star-deco" style={{ top: '8%', right: '12%', fontSize: '13px', animationDelay: '-0.5s' }}>❋</span>
+      {/* Olive branch deco */}
+      <svg className="leaf-deco" style={{ bottom: '10%', left: '1%', width: '70px', opacity: 0.11, animationDelay: '-4s' }} viewBox="0 0 80 160" fill="none" aria-hidden="true">
+        <path d="M40 155 Q42 80 50 20" stroke="#7A8C4E" strokeWidth="2.5" fill="none"/>
+        {[30,50,70,90,110,130].map((y, i) => (
+          <ellipse key={i} cx={i % 2 === 0 ? 28 : 55} cy={y} rx="14" ry="8"
+            fill="#7A8C4E" transform={`rotate(${i % 2 === 0 ? -35 : 35} ${i % 2 === 0 ? 28 : 55} ${y})`} />
+        ))}
+      </svg>
 
       <div className="wrap">
         <div className="center-head reveal">

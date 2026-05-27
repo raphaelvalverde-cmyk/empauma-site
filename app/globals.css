@@ -313,7 +313,7 @@ section { position: relative; overflow: hidden; }
   background: var(--olive-deep);
 }
 .hero-bg { position: absolute; inset: 0; z-index: 0; }
-.hero-bg img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.05); animation: heroZoom 18s ease-in-out infinite alternate; opacity: 0.28; }
+.hero-bg img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.05); animation: heroZoom 18s ease-in-out infinite alternate; opacity: 0.42; }
 @keyframes heroZoom {
   from { transform: scale(1.05); }
   to { transform: scale(1.12); }
@@ -485,10 +485,22 @@ section { position: relative; overflow: hidden; }
   transform: rotate(0);
   transition: all 0.6s var(--ease);
 }
-.service-card:nth-child(3n+1) .service-icon { background: linear-gradient(135deg, var(--olive-deep), var(--sage-light)); }
-.service-card:nth-child(3n+2) .service-icon { background: linear-gradient(135deg, var(--ocre-rust), var(--ocre-honey)); }
-.service-card:nth-child(3n)   .service-icon { background: linear-gradient(135deg, var(--terracotta), var(--ocre-honey)); }
-.service-card:nth-child(3n+2) .service-icon::after { border-color: var(--ocre-honey); }
+.service-card:nth-child(1)  .service-icon { background: linear-gradient(135deg, var(--olive-deep), var(--sage-light)); }
+.service-card:nth-child(2)  .service-icon { background: linear-gradient(135deg, var(--ocre-rust), var(--ocre-honey)); }
+.service-card:nth-child(3)  .service-icon { background: linear-gradient(135deg, var(--lavender), #BEB0D4); }
+.service-card:nth-child(4)  .service-icon { background: linear-gradient(135deg, var(--terracotta), var(--ocre-soft)); }
+.service-card:nth-child(5)  .service-icon { background: linear-gradient(135deg, var(--sage), var(--sage-pale)); }
+.service-card:nth-child(6)  .service-icon { background: linear-gradient(135deg, var(--olive-rich), var(--sage-light)); }
+.service-card:nth-child(7)  .service-icon { background: linear-gradient(135deg, var(--ocre-honey), var(--terracotta)); }
+.service-card:nth-child(8)  .service-icon { background: linear-gradient(135deg, var(--lavender), var(--ocre-soft)); }
+.service-card:nth-child(9)  .service-icon { background: linear-gradient(135deg, var(--terracotta), var(--lavender)); }
+.service-card:nth-child(10) .service-icon { background: linear-gradient(135deg, var(--olive-deep), var(--ocre-rust)); }
+.service-card:nth-child(2)  .service-icon::after,
+.service-card:nth-child(4)  .service-icon::after,
+.service-card:nth-child(7)  .service-icon::after,
+.service-card:nth-child(10) .service-icon::after { border-color: var(--ocre-honey); }
+.service-card:nth-child(3)  .service-icon::after,
+.service-card:nth-child(8)  .service-icon::after { border-color: var(--lavender); }
 .service-card:hover .service-icon { transform: rotate(-6deg) scale(1.08); }
 .service-card:hover .service-icon::after { opacity: 0.4; transform: rotate(45deg); }
 .service-icon svg { width: 26px; height: 26px; }
@@ -798,6 +810,56 @@ section { position: relative; overflow: hidden; }
 .testimonial-author { display: flex; align-items: center; gap: 14px; position: relative; z-index: 2; }
 .testimonial-author .name { font-family: var(--serif); font-size: 18px; font-weight: 500; color: var(--ink); }
 .testimonial-author .detail { font-size: 12.5px; color: var(--sage); font-weight: 400; }
+
+/* ---- Profile photo bubbles ---- */
+.testimonial-avatar {
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 2.5px solid var(--ocre-honey);
+  background: var(--sage-pale);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(196, 154, 88, 0.28);
+  transition: transform 0.4s var(--ease);
+}
+.testimonial:hover .testimonial-avatar { transform: scale(1.08) rotate(-3deg); }
+.avatar-initial {
+  font-family: var(--serif);
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--olive-deep);
+  position: relative;
+  z-index: 1;
+  user-select: none;
+}
+.avatar-initial-lg { font-size: 46px; }
+
+/* ---- About profile photo ---- */
+.about-profile-photo-wrap {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+}
+.about-profile-photo {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3.5px solid var(--ocre-honey);
+  background: var(--sage-pale);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 28px rgba(196, 154, 88, 0.38);
+  transition: transform 0.5s var(--ease);
+}
+.about-block:hover .about-profile-photo { transform: rotate(-4deg) scale(1.04); }
 
 /* ============ ABOUT ============ */
 .about { background: var(--white-warm); }
