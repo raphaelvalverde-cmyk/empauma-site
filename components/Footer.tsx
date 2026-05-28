@@ -24,9 +24,8 @@ export default function Footer() {
         <div className="footer-bottom">
           <div className="footer-copy">© 2026 Empauma. Tous droits réservés.</div>
           <div className="footer-legal">
-            <a href="#">Mentions légales</a>
-            <a href="#">Politique de confidentialité</a>
-            <a href="#">CGV</a>
+            <a href="/mentions-legales">Mentions légales</a>
+            <a href="/politique-de-confidentialite">Politique de confidentialité</a>
           </div>
         </div>
       </div>
