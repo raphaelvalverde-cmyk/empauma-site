@@ -86,7 +86,7 @@ export default function Contact() {
             </div>
 
             <div className="contact-decor">
-              <p>&ldquo;Votre bien entre de bonnes mains.&rdquo;</p>
+              <p>&ldquo;Votre bien, pris en main avec soin.&rdquo;</p>
               <div className="sign">— Empauma Conciergerie</div>
             </div>
           </div>

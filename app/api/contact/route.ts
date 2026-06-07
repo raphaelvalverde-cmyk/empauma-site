@@ -59,7 +59,7 @@ export async function POST(req: Request) {
           <p style="color: #5C5545; line-height: 1.7;">
             En attendant, n'hésitez pas à nous appeler directement au <strong>06 66 73 85 07</strong>.
           </p>
-          <p style="font-style: italic; color: #7A8C4E; margin-top: 32px;">&ldquo;Votre bien entre de bonnes mains.&rdquo;</p>
+          <p style="font-style: italic; color: #7A8C4E; margin-top: 32px;">&ldquo;Votre bien, pris en main avec soin.&rdquo;</p>
           <p style="color: #888; font-size: 13px;">— L'équipe Empauma Conciergerie</p>
         </div>
       `,

@@ -45,7 +45,7 @@ export default function Hero() {
             <br />
             <em>gérées de A à Z.</em>
           </h1>
-          <p className="hero-slogan reveal">Votre bien entre de bonnes mains.</p>
+          <p className="hero-slogan reveal">Votre bien, pris en main avec soin.</p>
           <div className="hero-actions reveal">
             <a href="#contact" className="btn btn-gold">
               <span>Contactez-nous</span>
