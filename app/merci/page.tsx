@@ -40,7 +40,7 @@ export default function MerciPage() {
         </Link>
 
         <div className="merci-signature">
-          <p>&ldquo;Votre bien entre de bonnes mains.&rdquo;</p>
+          <p>&ldquo;Votre bien, pris en main avec soin.&rdquo;</p>
           <span>— L&apos;équipe Empauma</span>
         </div>
       </div>

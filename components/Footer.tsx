@@ -9,7 +9,7 @@ export default function Footer() {
           <div className="footer-brand">
             <div className="name">EMPAUMA</div>
             <div className="sub">Conciergerie</div>
-            <div className="slogan">Votre bien entre de bonnes mains</div>
+            <div className="slogan">Votre bien, pris en main avec soin</div>
           </div>
           <nav className="footer-nav" aria-label="Navigation pied de page">
             <a href="#accueil">Accueil</a>
