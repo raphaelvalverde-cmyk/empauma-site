@@ -326,7 +326,7 @@ async function generateFlyer() {
       <div class="logo-name">EMPAUMA</div>
       <div class="logo-rule"></div>
       <div class="logo-sub">CONCIERGERIE</div>
-      <div class="logo-slogan">Votre bien entre de bonnes mains</div>
+      <div class="logo-slogan">Votre bien pris en main avec soin</div>
       <div class="orn" style="margin-top:14px;margin-bottom:0">
         <div class="orn-line"></div><span class="star">✦</span><div class="orn-line"></div>
       </div>
